@@ -1,0 +1,8 @@
+--Resetting auto increment
+SET @num is 0;
+UPDATE my_table SET id = @num :=(@num + 1);
+ALTER TABLE my_table AUTO_INCREMENT =1;
+
+SET @num := 0;
+UPDATE program SET program_id = @num := (@num +1);
+ALTER TABLE program AUTO_INCREMENT = 1;
