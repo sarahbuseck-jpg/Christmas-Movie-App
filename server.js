@@ -1,28 +1,21 @@
+// server.js
 const express = require('express');
-const server = express();
-const cors = require('cors');
-const helmet = require('helmet');
+const app = express();
+const apiRoutes = require('./routes/api');
 
-// Import API router
-const apiRouter = require('./routes/api'); // <-- must match your folder/file exactly
+// Middleware to parse JSON
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+// Use the API routes
+app.use('/api', apiRoutes);
 
-// Middleware
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
-
-// Mount routes
-server.use('/api', apiRouter);
-
-// Test route for root
-server.get('/', (req, res) => {
-  res.send('Server is running');
+// Root route
+app.get('/', (req, res) => {
+  res.send('Welcome to ChristmasDB!');
 });
 
 // Start server
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
