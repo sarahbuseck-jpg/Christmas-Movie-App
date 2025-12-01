@@ -11,8 +11,7 @@ router.get('/', (req, res) => {
         message: "ChristmasDB API Root",
         endpoints: {
             "All Actors": `http://localhost:${PORT}/api/actors`,
-            "Hello": `http://localhost:${PORT}/api/hello`,
-            "Echo (POST)": `http://localhost:${PORT}/api/echo`
+          
         }
     });
 });
@@ -28,7 +27,7 @@ router.post('/echo', (req, res) => {
 // 404 handler for /api only
 router.use((req, res, next) => {
     res.status(404)
-    .send('<h1>404 error this page does not exist'</h1>)
+    .send('404 error this page does not exist')
         
     });
 
