@@ -1,0 +1,32 @@
+const connect = require('../../config/dbconfig')
+
+const daoCommon = {
+
+    findAll: (req, res, table)=> {
+
+        connect.query  (
+            'SELECT * FROM ${table};',
+            (error, rows)=> {
+                if (!error) {
+                      if (rows.lenght ===1) {
+                        res.json(...rows)
+                      } else {
+                        res.json(rows)
+                      }
+                      
+                } else {
+                  console.log ['Dao error: ${error}']
+                  res.json({
+                    "message": 'error',
+                    'table': '${table}',
+                    'error': error
+                  })
+                }
+            }
+
+        )
+    }
+
+}
+
+module.export = daoCommon
