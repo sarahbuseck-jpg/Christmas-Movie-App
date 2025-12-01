@@ -1,27 +1,21 @@
-const  express = require('express')
-const server = express()
-const router = require('./routes/router')
-const PORT = process.env.PORT || 3000
+const express = require('express');   // Only declare once
+const server = express();
+const cors = require('cors');
+const helmet = require('helmet');
+const apiRouter = require('./routes/api'); // make sure the file exists
 
+const PORT = process.env.PORT || 3000;
 
-const helmet = require('helmet')
-const cors = require('cors')
+// Middleware
+server.use(helmet());
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
-server.use(helmet.contentSecurityPolicy({
-    useDefaults:true,
-    crossOriginResourcePolicy: false,
-    crossOriginEmbedderPolicy: false,
-    directives: {
-        "img-src": ("'self'","https: data"),
-        "scriptSrc": ("'self'", "cdn.jsdelivr.net")
-    }
+// Routes
+server.use('/api', apiRouter);
 
-}))
-
-server.use(cors())
-server.use(express.json())
-server.use(express.urlencoded({extened: true}))
-
-server.use('/', router)
-
-server.listen(PORT, ()=> console.log(`Server is running on port ${PORT}`))
+// Start server
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

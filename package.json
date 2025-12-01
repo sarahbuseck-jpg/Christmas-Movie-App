@@ -27,5 +27,6 @@
   "bugs": {
     "url": "https://github.com/sarahbuseck-jpg/Christmas-Movie-App/issues"
   },
-  "homepage": "https://github.com/sarahbuseck-jpg/Christmas-Movie-App#readme"
+  "homepage": "https://github.com/sarahbuseck-jpg/Christmas-Movie-App#readme",
+  "devDependencies": {}
 }
