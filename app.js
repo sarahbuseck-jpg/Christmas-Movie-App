@@ -1,26 +1,26 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000;
-
-
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-
-
-//http://localhost:3000/
-app.get('/', (req, res) => {
-    res.end('My Christmas Movie App!')
-})
-
+const express = require('express');
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-//http://localhost:3000/programs
-app.get('/programs',(req, res) => {
-    
-    
-const url = 'http://localhost:3000/programs';
+// Root route
+app.get('/', (req, res) => {
+    res.send('My Christmas Movie App!');
+});
 
-fetch(url)
-    .then(response => console.log(res))
+// Example programs route
+app.get('/programs', async (req, res) => {
+    // In a real scenario, you would fetch data from an API or database
+    // For demonstration, we just send a JSON array
+    const programs = [
+        { id: 1, title: 'Home Alone' },
+        { id: 2, title: 'Elf' },
+        { id: 3, title: 'The Grinch' }
+    ];
 
+    res.json(programs);
+});
 
-app.listen(PORT, () => console.log('Server is running at http://localhost:' + PORT));
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running at http://localhost:${PORT}`);
+});
