@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 
 
-router.use('/api/actor', require ('./api/acotRoutes'))
+router.use('/api/actor', require ('./api/actorRoutes'))
 
 
 
