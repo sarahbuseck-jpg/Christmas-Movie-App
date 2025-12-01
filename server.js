@@ -1,21 +1,38 @@
-// server.js
 const express = require('express');
 const app = express();
 const apiRoutes = require('./routes/api');
 
-// Middleware to parse JSON
-app.use(express.json());
 
-// Use the API routes
+const helmet = require('helmet')
+const cors = require('cors')
+const PORT = process.env.PORT || 3000;
+
+
+app.use(helmet.contentSecurityPolicy({
+  useDefaults: true,
+  crossOriginResourcePolicy: false,
+  crossOriginEmbedderPolicy: false,
+  directives: {
+    "img-src":["'self'", "https: data"],
+    "script-scr": ["'self'", "cdn.jsdelivr.net"]
+  }
+}))
+
+
 app.use('/api', apiRoutes);
 
-// Root route
+
 app.get('/', (req, res) => {
   res.send('Welcome to ChristmasDB!');
-});
+})
 
-// Start server
-const PORT = 3000;
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+app.use('/', router)
+
+constPORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
