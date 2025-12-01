@@ -17,22 +17,20 @@ router.get('/', (req, res) => {
     });
 });
 
-// Example GET route
+
 router.get('/hello', (req, res) => {
     res.json({ message: 'Hello from ChristmasDB!' });
 });
-
-// Example POST route
 router.post('/echo', (req, res) => {
     res.json({ received: req.body });
 });
 
 // 404 handler for /api only
-router.use((req, res) => {
-    res.status(404).json({
-        error: "API endpoint not found",
-        path: req.originalUrl
+router.use((req, res, next) => {
+    res.status(404)
+    .send('<h1>404 error this page does not exist'</h1>)
+        
     });
-});
+
 
 module.exports = router;
