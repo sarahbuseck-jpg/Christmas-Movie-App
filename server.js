@@ -1,6 +1,6 @@
 const  express = require('express')
 const server = express()
-
+const router = require('./routes/router')
 const PORT = process.env.PORT || 3000
 
 
@@ -22,5 +22,6 @@ server.use(cors())
 server.use(express.json())
 server.use(express.urlencoded({extened: true}))
 
+server.use('/', router)
 
 server.listen(PORT, ()=> console.log(`Server is running on port ${PORT}`))
