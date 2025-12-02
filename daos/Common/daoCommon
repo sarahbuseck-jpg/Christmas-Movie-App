@@ -1,21 +1,23 @@
 const connect = require('../../config/dbconfig')
 
 const daoCommon = {
+ table: 'actors', 
 
-    findAll: (req, res, table)=> {
+    findAll: async (req, res, table)=> {
+      try {
 
-        connect.query  (
-            'SELECT * FROM ${table};',
+        const [rows] = await connect.query  (
+            `SELECT * FROM ${table};`),
             (error, rows)=> {
                 if (!error) {
-                      if (rows.lenght ===1) {
+                      if (rows.length ===1) {
                         res.json(...rows)
                       } else {
                         res.json(rows)
                       }
                       
                 } else {
-                  console.log ['Dao error: ${error}']
+                  console.log(`Dao error: ${error}`)
                   res.json({
                     "message": 'error',
                     'table': '${table}',
@@ -24,9 +26,12 @@ const daoCommon = {
                 }
             }
 
-        )
+        
     }
-
+  
+    }
 }
 
-module.export = daoCommon
+
+
+module.exports = daoCommon;

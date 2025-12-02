@@ -14,11 +14,13 @@ router.get('/', (req, res) => {
 });
 
 
-
+console.log("routes.js loaded");
 
 router.use('/actors', require ('./api/actorRoutes'))
 
-
+router.get('/test', (req, res) => {
+    res.send("Test route works");
+});
 
 router.use((req, res, next) => {
     res.status(404)
@@ -26,5 +28,6 @@ router.use((req, res, next) => {
         
     });
 
+console.log("routes.js loaded");
 
 module.exports = router;
