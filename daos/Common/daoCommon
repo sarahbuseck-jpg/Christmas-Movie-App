@@ -1,37 +1,27 @@
-const connect = require('../../config/dbconfig')
+const connect = require('../../config/dbconfig');
 
 const daoCommon = {
- table: 'actors', 
+    table: 'actors',
 
-    findAll: async (req, res, table)=> {
-      try {
+    findAll: async (req, res, table) => {
+        try {
+            // Await the query without callback
+            const [rows] = await connect.query(`SELECT * FROM ${table};`);
 
-        const [rows] = await connect.query  (
-            `SELECT * FROM ${table};`),
-            (error, rows)=> {
-                if (!error) {
-                      if (rows.length ===1) {
-                        res.json(...rows)
-                      } else {
-                        res.json(rows)
-                      }
-                      
-                } else {
-                  console.log(`Dao error: ${error}`)
-                  res.json({
-                    "message": 'error',
-                    'table': '${table}',
-                    'error': error
-                  })
-                }
+            if (rows.length === 1) {
+                res.json(...rows);
+            } else {
+                res.json(rows);
             }
-
-        
+        } catch (error) {
+            console.log(`Dao error: ${error}`);
+            res.json({
+                message: 'error',
+                table: table,
+                error: error
+            });
+        }
     }
-  
-    }
-}
-
-
+};
 
 module.exports = daoCommon;

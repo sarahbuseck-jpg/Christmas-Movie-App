@@ -13,250 +13,414 @@ VALUES
 
 
 
-INSERT INTO production (production)
-VALUES 
-('hughes entertainment'),
-('new line cinema'),
-('illusion entertainment'),
-('castle rock entertainment'),
-('metro-goldwyn-mayer '),
-('twentieth century fox'),
-('imagine entertainment'),
-('spa studios'),
-('walt disney pictures'),
-('aardman animations'),
-('1492 pictures'),
-('lee medelson films'),
-('touchstone pictures'),
-('rankin bass productions'),
-('jim henson productions'),
-('mirage studios'),
-('columbia pictures'),
-('paramount pictures'),
-('rko pictures'),
-('united artists'),
-('pixar animation studios'),
-('sony pictures animation'),
-('noel coward productions'),
-('rich in spirit productions'),
-('largo entertainment'),
-('regency enterprises'),
-('motion picture corporation'),
-('aardman animations'),
-('rankin/bass productions');
+INSERT INTO production (name) VALUES
+('20th Century Fox'),
+('New Line Cinema'),
+('Walt Disney Pictures'),
+('Illumination Entertainment'),
+('Metro-Goldwyn-Mayer'),
+('National Lampoon'),
+('Columbia Pictures'),
+('Twentieth Century Fox'),
+('Netflix Animation'),
+('Warner Bros. Pictures'),
+('Rankin/Bass'),
+('Paramount Pictures'),
+('Universal Pictures'),
+('Peanuts Worldwide'),
+('Disney'),
+('Universal'),
+('Broadway Video'),
+('Universal'),
+('Paramount'),
+('Paramount'),
+('Jim Henson Productions'),
+('Sony Pictures Animation'),
+('Lionsgate'),
+('Universal'),
+('Netflix'),
+('Disney'),
+('Netflix'),
+('Sony Pictures'),
+('RKO Pictures'),
+('Rankin/Bass');
+
+
+
+
+
 
 INSERT INTO director (director)
 VALUES 
-('chris', 'columbus'),
-('jon', 'favreau'),
-('john', 'pasquin'),
-('yarrow', 'chesney'),
-('bob', 'clark'),
-('jeremiah', 'checik'),
-('george', 'seaton'),
-('brian', 'levant'),
-('serigo', 'pablos'),
-('robert', 'zemeckis'),
-('larry', 'roemer'),
-('jules', 'bass'),
-('jonathan', 'levin'),
-('richard', 'donner'),
-('bill',  'melendez'),
-('tom', 'myers'),
-('clay', 'kaytis'),
-('nancy', 'meyers'),
-('richard', 'curtis'),
-('terry', 'zwigoff'),
-('ron', 'howard'),
-('john', 'whitesell'),
-('sarah', 'smith'),
-('alex', 'zamm'),
-('mark', 'sandrich'),
-('michael', 'curtiz'),
-('brian', 'henson'),
-('timothy', 'reckart'),
-('chazz', 'palminteri'),
-('paul', 'feig'),
-('sean', 'anders');
+('chris columbus'),
+('jon favreau'),
+('john pasquin'),
+('yarrow chesney'),
+('bob clark'),
+('jeremiah checik'),
+('george seaton'),
+('brian levant'),
+('serigo pablos'),
+('robert zemeckis'),
+('larry roemer'),
+('jules bass'),
+('jonathan levin'),
+('richard donner'),
+('bill melendez'),
+('tom myers'),
+('clay kaytis'),
+('nancy meyers'),
+('richard curtis'),
+('terry zwigoff'),
+('ron howard'),
+('john whitesell'),
+('sarah smith'),
+('alex zamm'),
+('mark sandrich'),
+('michael curtiz'),
+('brian henson'),
+('timothy reckart'),
+('chazz palminteri'),
+('paul feig'),
+('sean anders');
 
 
 
 
-
-
-
-INSERT INTO streaming_platform(streaming_platform)
+INSERT INTO actor (first_name, last_name, img_url)
 VALUES
- ('apple tv'),
-('disney plus'),
-('hulu'),
-('netflix'),
-('paramount plus'),
-('peacock'),
-('prime video'),
-('max'),
-('starz'),
-('tubi'),
-('youtube');
+('Caulay', 'Culkin', 'm_culkin.jpg'),
+('Joe', 'Pesci', 'j_pesci.jpg'),
+('Daniel', 'Stern', 'd_stern.jpg'),
+('Kieran', 'Culkin', 'k_culkin.jpg'),
+('Catherine', 'O Hara', 'c_ohara.jpg'),
+('Will', 'Ferrell', 'w_ferrell.jpg'),
+('James', 'Caan', 'j_caan.jpg'),
+('Zooey', 'Deschanel', 'z_deschanel.jpg'),
+('Peter', 'Dinklage', 'p_dinklage.jpg'),
+('Jon', 'Favreau', 'j_favreau.jpg'),
+('Tim', 'Allen', 't_allen.jpg'),
+('Eric', 'Lloyd', 'e_lloyd.jpg'),
+('David', 'Krumholtz', 'd_krumholtz.jpg'),
+('Wendy', 'Crewson', 'w_crewson.jpg'),
+('Judge', 'Reinhold', 'j_reinhold.jpg'),
+('Benedict', 'Cumberbatch', 'b_cumberbatch.jpg'),
+('Cameron', 'Seely', 'c_seely.jpg'),
+('Rashida', 'Jones', 'r_jones.jpg'),
+('Mindy', 'Sterling', 'm_sterling.jpg'),
+('Pharrell', 'Williams', 'p_williams.jpg'),
+('Peter', 'Billingsley', 'p_billingsley.jpg'),
+('Ian', 'Petrella', 'i_petrella.jpg'),
+('Zack', 'Ward', 'z_ward.jpg'),
+('Michelle', 'Dillon', 'm_dillon.jpg'),
+('Scott', 'Schwartz', 's_schwartz.jpg'),
+('Chevy', 'Chase', 'c_chase.jpg'),
+('Randy', 'Quaid', 'r_quaid.jpg'),
+('Beverly', 'DAngelo', 'b_dangelo.jpg'),
+('Johnny', 'Galecki', 'j_galecki.jpg'),
+('Juliette', 'Lewis', 'j_lewis.jpg'),
+('Natalie', 'Wood', 'n_wood.jpg'),
+('Edmund', 'Gwenn', 'e_gwenn.jpg'),
+('Maureen', 'Ohara', 'm_ohara.jpg'),
+('John', 'Payne', 'j_payne.jpg'),
+('Alvin', 'Greenman', 'a_greenman.jpg'),
+('Arnold', 'Schwarzenegger', 'a_schwarzenegger.jpg'),
+('Sinbad', NULL, 'sinbad.jpg'),
+('Jake', 'Lloyd', 'j_lloyd.jpg'),
+('Phil', 'Hartman', 'p_hartman.jpg'),
+('Jason', 'Schwartzman', 'j_schwartzman.jpg'),
+('Sergio', 'Pablos', 's_pablos.jpg'),
+('Norm', 'MacDonald', 'n_macdonald.jpg'),
+('JK', 'Simmons', 'j_simmons.jpg'),
+('Tom', 'Hanks', 't_hanks.jpg'),
+('Josh', 'Hutcherson', 'j_hutcherson.jpg'),
+('Eddie', 'Deezen', 'e_deezen.jpg'),
+('Michael', 'Jeter', 'm_jeter.jpg'),
+('Nona', 'Gaye', 'n_gaye.jpg'),
+('Billie Mae', 'Richards', 'b_richards.jpg'),
+('Burl', 'Ives', 'b_ives.jpg'),
+('Paul', 'Soles', 'p_soles.jpg'),
+('Stan', 'Francis', 's_francis.jpg'),
+('Larry', 'Mann', 'l_mann.jpg'),
+('Jackie', 'Vernon', 'j_vernon.jpg'),
+('Jimmy', 'Durante', 'j_durante.jpg'),
+('Billy De', 'Wolfe', 'b_wolfe.jpg'),
+('Paul', 'Frees', 'p_frees2.jpg'),
+('June', 'Foray', 'j_foray.jpg'),
+('Bill', 'Murray', 'b_murray.jpg'),
+('Carol', 'Kane', 'c_kane.jpg'),
+('Karen', 'Allen', 'k_allen.jpg'),
+('Alfre', 'Woodard', 'a_woodard.jpg'),
+('David', 'Johansen', 'd_johansen.jpg'),
+('Peter', 'Robbins', 'p_robbins.jpg'),
+('Ann', 'Altieri', 'a_altieri.jpg'),
+('Frieda', NULL, 'frieda.jpg'),
+('Chris', 'Doran', 'c_doran.jpg'),
+('Sally', 'Dryer', 's_dryer.jpg'),
+('Kurt', 'Russell', 'k_russell.jpg'),
+('Darby', 'Camp', 'd_camp.jpg'),
+('Judah', 'Lewis', 'j_lewis2.jpg'),
+('Kimberly', 'Williams', 'k_williams.jpg'),
+('Oliver', 'Hudson', 'o_hudson.jpg'),
+('Cameron', 'Diaz', 'c_diaz.jpg'),
+('Jude', 'Law', 'j_law.jpg'),
+('Kate', 'Winslet', 'k_winslet.jpg'),
+('Jack', 'Black', 'j_black.jpg'),
+('Eli', 'Wallach', 'e_wallach.jpg'),
+('Billy Bob', 'Thornton', 'b_thornton.jpg'),
+('Brett', 'Kelly', 'b_kelly.jpg'),
+('John', 'Ritter', 'j_ritter.jpg'),
+('Tony', 'Cox', 't_cox.jpg'),
+('Lauren', 'Graham', 'l_graham.jpg'),
+('Jim', 'Carrey', 'j_carrey.jpg'),
+('Taylor', 'Momsen', 't_momsen.jpg'),
+('Christine', 'Baranski', 'c_baranski.jpg'),
+('Josh Ryan', 'Evans', 'j_evans.jpg'),
+('Jeffrey', 'Tambor', 'j_tambor.jpg'),
+('Bing', 'Crosby', 'b_crosby.jpg'),
+('Fred', 'Astaire', 'f_astaire.jpg'),
+('Marjorie', 'Reynolds', 'm_reynolds.jpg'),
+('Virginia', 'Dale', 'v_dale.jpg'),
+('Danny', 'Kaye', 'd_kaye.jpg'),
+('Rosemary', 'Clooney', 'r_clooney.jpg'),
+('Vera', 'Ellen', 'v_ellen.jpg'),
+('Dean', 'Jagger', 'd_jagger.jpg'),
+('Dave', 'Goeltz', 'd_goeltz.jpg'),
+('Michael', 'Caine', 'm_caine.jpg'),
+('Frank', 'Oz', 'f_oz.jpg'),
+('Steve', 'Whitmire', 's_whitmire.jpg'),
+('Jerry', 'Nelson', 'j_nelson.jpg'),
+('Theo', 'Sanders', 't_sanders.jpg'),
+('Steven', 'Yeun', 's_yeun.jpg'),
+('Tyler', 'Perry', 't_perry.jpg'),
+('Gina', 'Rodriguez', 'g_rodriguez.jpg'),
+('Keegan-Michael', 'Key', 'k_key.jpg'),
+('Oprah', 'Winfrey', 'o_winfrey.jpg'),
+('Paul', 'Walker', 'p_walker.jpg'),
+('Susan', 'Sarandon', 's_sarandon.jpg'),
+('Penelope', 'Cruz', 'p_cruz.jpg'),
+('Chazz', 'Palminteri', 'c_palminteri.jpg'),
+('Alan', 'Arkin', 'a_arkin.jpg'),
+('Emilia', 'Clarke', 'e_clarke.jpg'),
+('Henry', 'Golding', 'h_golding.jpg'),
+('Emma', 'Thompson', 'e_thompson.jpg'),
+('Michelle', 'Yeoh', 'm_yeoh.jpg'),
+('Andrew', 'Ridgeley', 'a_ridgeley.jpg'),
+('Harry', 'Holland', 'h_holland.jpg'),
+('Ryan', 'Reynolds', 'r_reynolds.jpg'),
+('Will', 'Ferrell', 'w_ferrell2.jpg'),
+('Arasha', 'Lalani', 'a_lalani.jpg'),
+('Sunita', 'Mani', 's_mani.jpg'),
+('Danny', 'DeVito', 'd_devito.jpg'),
+('Matthew', 'Broderick', 'm_broderick.jpg'),
+('Kristin', 'Davis', 'k_davis.jpg'),
+('Kristin', 'Chenoweth', 'k_chenoweth.jpg'),
+('Ben', 'Lamb', 'b_lamb.jpg'),
+('Rose', 'McIver', 'r_mciver.jpg'),
+('Alice', 'Krige', 'a_krige.jpg'),
+('Honor', 'Kneafsey', 'h_kneafsey.jpg'),
+('James', 'McAvoy', 'j_mcavoy.jpg'),
+('Bill', 'Nighy', 'b_nighy.jpg'),
+('Hugh', 'Laurie', 'h_laurie.jpg'),
+('James', 'Stewart', 'j_stewart.jpg'),
+('Donna', 'Reed', 'd_reed.jpg'),
+('Karolyn', 'Grimes', 'k_grimes.jpg'),
+('Virginia', 'Patton', 'v_patton.jpg'),
+('Mickey', 'Rooney', 'm_rooney.jpg'),
+('Keenan', 'Wynn', 'k_wynn.jpg'),
+('Robie', 'Lester', 'r_lester.jpg');
+
+
+
+INSERT INTO program_to_streaming (program_id, platform) VALUES
+(1, 'disney plus'),
+(2, 'hbomax'),
+(3, 'disney plus'),
+(4, 'netflix'),
+(5, 'hbomax'),
+(6, 'hbomax'),
+(14, 'amazon prime'),
+(18, 'netflix'),
+(19, 'amazon prime'),
+(24, 'amazon prime'),
+(28, 'amazon prime'),
+(30, 'apple tv plus');
+
+
+INSERT INTO program (title, rating, runtime, nationality, yr_released, budget, gross, production_id, showing, poster) VALUES
+('Home Alone', 'pg', '01:43:00', 'USA', 1990, 18000000, 450000000, 1, 'disney plus', 'homealone.jpg'),
+('Elf', 'pg', '01:37:00', 'USA', 2003, 33000000, 220000000, 2, 'hbomax', 'elf.jpg'),
+('The Santa Claus', 'pg', '01:39:00', 'USA', 1994, 22000000, 190000000, 3, 'disney plus', 'santaclause.jpg'),
+('The Grinch', 'pg', '01:45:00', 'USA', 2018, 75000000, 510000000, 4, 'netflix', 'grinch.jpg'),
+('A Christmas Story', 'pg', '01:34:00', 'USA', 1983, 4000000, 66000000, 5, 'hbomax', 'christmasstory.jpg'),
+('Christmas Vacation', 'pg-13', '01:55:00', 'USA', 1989, 25000000, 73000000, 6, 'hbomax', 'christmasvac.jpg'),
+('Miracle on 34th Street', 'g', '01:36:00', 'USA', 1947, 600000, 2700000, 7, 'disney plus', 'miracle.jpg'),
+('Jingle All the Way', 'pg', '01:30:00', 'USA', 1996, 75000000, 129000000, 8, 'disney plus', 'jinglealltheway.jpg'),
+('Klaus', 'pg', '01:36:00', 'USA', 2019, 40000000, 0, 9, 'netflix', 'klaus.jpg'),
+('The Polar Express', 'g', '01:40:00', 'USA', 2004, 165000000, 314000000, 10, 'hbomax', 'polarexpress.jpg'),
+('Rudolph the Red-Nosed Reindeer', 'g', '01:20:00', 'USA', 1964, 500000, 1000000, 11, 'peacock', 'rudolph.jpg'),
+('Frosty the Snowman', 'g', '00:50:00', 'USA', 1969, 200000, 800000, 12, 'paramount plus', 'frosty.jpg'),
+('Scrooged', 'pg-13', '01:45:00', 'USA', 1988, 15000000, 52000000, 13, 'netflix', 'scrooged.jpg'),
+('A Charlie Brown Christmas', 'g', '00:30:00', 'USA', 1965, 150000, 600000, 14, 'amazon prime', 'charliebrown.jpg'),
+('The Christmas Chronicles', 'pg', '01:45:00', 'USA', 2018, 60000000, 150000000, 15, 'disney plus', 'christmaschronicles.jpg'),
+('The Holiday', 'pg-13', '02:05:00', 'USA', 2006, 50000000, 70000000, 16, 'netflix', 'theholiday.jpg'),
+('Bad Santa', 'r', '01:35:00', 'USA', 2003, 70000000, 90000000, 17, 'netflix', 'badsanta.jpg'),
+('How the Grinch Stole Christmas', 'pg', '01:45:00', 'USA', 2000, 40000000, 246000000, 18, 'netflix', 'htgscc.jpg'),
+('Holiday Inn', 'pg', '01:40:00', 'USA', 1942, 23000000, 76000000, 19, 'amazon prime', 'holidayinn.jpg'),
+('White Christmas', 'g', '02:00:00', 'USA', 1954, 123000000, 345000000, 20, 'netflix', 'whitechristmas.jpg'),
+('The Muppets Christmas Carol', 'g', '01:25:00', 'USA', 1992, 51000000, 46000000, 21, 'hulu', 'muppetchristmascarol.jpg'),
+('The Star', 'g', '01:30:00', 'USA', 2017, 100000000, 147000000, 22, 'netflix', 'thestar.jpg'),
+('Noel', 'pg-13', '01:50:00', 'USA', 2004, 30000000, 0, 23, 'netflix', 'noel.jpg'),
+('Last Christmas', 'pg-13', '01:43:00', 'USA', 2019, 20000000, 100000000, 24, 'amazon prime', 'lastchristmas.jpg'),
+('Spirited', 'pg-13', '01:52:00', 'USA', 2020, 50000000, 120000000, 25, 'netflix', 'spirited.jpg'),
+('Deck the Halls', 'pg', '01:30:00', 'USA', 2006, 20000000, 63000000, 26, 'disney plus', 'deckthehalls.jpg'),
+('The Christmas Prince', 'g', '01:36:00', 'USA', 2017, 20000000, 3000000, 27, 'netflix', 'christmasprince.jpg'),
+('Arthur Christmas', 'pg', '01:40:00', 'USA', 2004, 75000000, 123000000, 28, 'amazon prime', 'arthurchristmas.jpg'),
+('It''s a Wonderful Life', 'g', '02:10:00', 'USA', 1946, 3000000, 0, 29, 'amazon prime', 'itsawonderfullife.jpg'),
+('Santa Claus is Coming to Town', 'pg', '01:27:00', 'USA', 1970, 20000000, 0, 30, 'apple tv plus', 'santaclausetocometown.jpg');
 
 
 
 
-
-
-
-
-INSERT INTO program(title, rating, runtime, yr_released, budget, gross, production_id, showing, poster)
-VALUES ('home alone', 'pg', '1:30:00', 'movie', 1990, 1800000, 45000000, 67, 'disney plus', 'homealone.jpg'),
-
-('elf', 'pg', '1:37:00', 'movie', 2003, 3300000, 22000000, 2, 'hulu', 'elf.jpg'),
-
-('the santa clause', 'pg', '1:39:00', 'movie', 1994, 2200000, 19000000, 1, 'disney plus', 'santaclause.jpg'),
-
-('the grinch', 'pg', '1:45:00', 'movie', 2000, 12300000, 27000000, 3, 'hulu', 'grinch.jpg'),
-
-('a christmas story', 'pg', '1:50:00', 'movie', 1983, 8000000, 19000000, 4, 'hbomax', 'christmasstory.jpg'),
-
-('christmas vaction', 'pg','0:95:00', 'movie', 1989, 9000000, 21000000, 5, 'hbomax', 'vaction.jpg'),
-('miracle on 34th street', 'g', '1:36:00', 'movie', 1947, 2000000, 7500000, 8, 'hbomax', 'miracle34.jpg'),
-
-('jingle all the way', 'pg', '1:30:00', 'movie', 1996, 1500000, 28000000, 9, 'hulu', 'jinglealltheway.jpg'),
-
-('klaus', 'pg', '1:36:00', 'movie', 2019, 2000000, 4000000, 11, 'netflix', 'klaus.jpg'),
-
-('the polar express', 'g', '1:40:00', 'movie', 2004, 16500000, 23000000, 7, 'hbomax', 'polarexpress.jpg'),
-
-('rudolph the red nosed reindeer', 'g', '1:20:00', 'movie', 1964, 300000, 1200000, 8, 'hbomax', 'rudolph.jpg'),
-
-
-('frosty the snowman', 'g', '0:50:00', 'movie', 1969, 200000, 800000, 10, 'hbomax', 'frosty.jpg'),
-('scrooged', 'pg-13', '1:45:00', 'movie', 1988, 1500000, 4000000, 12, 'peacock', 'scrooged.jpg'),
-
-('a charlie brown christmas', 'g', '0:30:00', 'movie', 1965, 150000, 600000, 9, 'hbomax', 'charliebrown.jpg'),
-
-(' the christmas chronicles', 'pg', '1:45:00', 'movie', 2018, 6000000, 15000000, 13, 'netflix', 'christmaschronicles.jpg'),
-
-('the holiday', 'pg-13', '2:05:00', 'movie', 2006, 5000000, 7000000, 13, 'peacock', 'theholiday.jpg'),
-
-('bad santa', 'r', '1:35:00', 'movie', 2003, 7000000, 9000000, 14, 'hulu', 'badsanta.jpg'),
-
-('how the grinch stole christmas', 'pg', '1:45:00', 'movie', 1966, 500000, 1500000, 6, 'hbomax', 'htgscc.jpg'),
-
-('hoilday inn', 'g', '1:40:00', 'movie', 1942, 1200000, 4000000, 15, 'hbomax', 'holidayinn.jpg'),
-
-('white christmas', 'g', '2:00:00', 'movie', 1954, 2500000, 8000000, 16, 'hbomax', 'whitechristmas.jpg'),
-
-('the muppet christmas carol', 'g', '1:25:00', 'movie', 1992, 1500000, 5000000, 17, 'hbomax', 'muppetchristmascarol.jpg'),
-
-('the star', 'pg', '1:30:00', 'movie', 2017, 2000000, 6000000, 18, 'peacock', 'thestar.jpg'),
-
-('noel', 'pg-13', '1:50:00', 'movie', 2004, 3000000, 8000000, 19, 'hulu', 'noel.jpg'),
-
-('last christmas', 'pg-13', '1:43:00', 'movie', 2019, 4000000, 10000000, 20, 'amazon prime', 'lastchristmas.jpg'),
-
-('spirited', 'pg-13', '1:52:00', 'movie', 2020, 5000000, 12000000, 21, 'hulu', 'spirited.jpg'),
-
-('deck the halls', 'pg-13', '1:30:00', 'movie', 2006, 6000000, 12000000, 22, 'hulu', 'deckthehalls.jpg'),
-
-('the christmas prince', 'pg', '1:30:00', 'movie', 2017, 3000000, 7000000, 23, 'netflix', 'christmasprince.jpg'),
-
-('a bad moms christmas', 'r', '1:44:00', 'movie', 2017, 4000000, 9000000, 24, 'hulu', 'badmomschristmas.jpg'),
-
-('arthur christmas', 'pg', '1:40:00', 'movie', 2011, 1750000, 5000000, 20, 'peacock', 'arthurchristmas.jpg'),
-
-('deck the halls', 'pg-13', '1:30:00', 'movie', 2006, 6000000, 12000000, 21, 'hulu', 'deckthehalls.jpg'),
-
-('Its a wonderful life', 'pg', '2:10:00', 'movie', 1946, 2000000, 7000000, 25, 'hbomax', 'itsawonderfullife.jpg'),
-
-('santa clause is coming to town', 'pg', '1:27:00', 'tv special', 1970, 400000, 1500000, 10, 'hbomax', 'santaclausetocometown.jpg'),
-
-
-INSERT INTO program_to_genre (program_id, genre_id)
-VALUES 
+INSERT INTO program_to_genre (program_id, genre_id) VALUES
 (1, 1), (1, 10),
-(2, 1), (2, 2),(2,4),
-(3, 1), (3,10),
-(4, 1), (4,2), (4,4),
-(5, 1), (5,2), (5,10),
-(6, 1), (6,3), (6,10),
-(7, 1), (7,5), (7,10),
-(8, 1), (8,3), (8,4),
-(9, 2), (9,4),
-(10, 2), (10,4), (10,5),
-(11, 1), (11,2), (11,4),
-(12, 1), (12,2),  (12,4),
-(13, 1), (13,3),  (13,5),
-(14, 2), (14,4),
-(15, 3), (15,4), (15,5),
-(16, 3), (16,4), (16,10),
-(17, 1), (17,2), (17,10),
-(18, 2), (18,4), (18,5),
-(19, 1), (19,5), (19,10),
-(20, 1), (20,2), (20,10),
-(21, 3), (21,4), (21,10),
-(22, 3), (22,4), (22,10),
-(23, 1), (23,2), (23,10),
-(24, 3), (24,4), (24,10),
-(25, 2), (25,4), (25,5),
-(26, 3), (26,4), (26,10),
-(27, 1), (27,10),
-(28, 1), (28,2), (28,10),
-(29, 1), (29,10),
-(30, 1), (30,2), (30,10),
+(2, 1), (2, 2), (2, 4),
+(3, 1), (3, 10),
+(4, 1), (4, 2), (4, 4),
+(5, 1), (5, 2), (5, 10),
+(6, 1), (6, 3), (6, 10),
+(7, 1), (7, 5), (7, 10),
+(8, 1), (8, 3), (8, 4),
+(9, 2), (9, 4),
+(10, 2), (10, 4), (10, 5),
+(11, 1), (11, 2), (11, 4),
+(12, 1), (12, 2), (12, 4),
+(13, 1), (13, 3), (13, 5),
+(14, 2), (14, 4),
+(15, 3), (15, 4), (15, 5),
+(16, 3), (16, 4), (16, 10),
+(17, 1), (17, 2), (17, 10),
+(18, 2), (18, 4), (18, 5),
+(19, 1), (19, 5), (19, 10),
+(20, 1), (20, 5),
+(21, 1), (21, 3),
+(22, 2), (22, 4),
+(23, 3), (23, 4),
+(24, 3), (24, 4),
+(25, 3), (25, 4),
+(26, 1), (26, 2),
+(27, 1), (27, 2),
+(28, 2), (28, 4),
+(29, 1), (29, 5),
+(30, 1), (30, 10);
 
-INSERT INTO program_to_streaming (program_id, streaming_platform_id)
-VALUES
-(1, 1), 
-(2, 1), 
-(3, 2), 
-(4, 6), 
-(5, 1), 
-(6, 7), 
-(7, 8), 
-(8, 2),
-(9, 3), 
-(10, 9), 
-(11, 8), 
-(12, 6), 
-(13, 4), 
-(14, 1), 
-(15, 1), 
-(16, 2), 
-(17, 8), 
-(18, 6), 
-(19, 10), 
-(20, 7), 
-(21, 2), 
-(22, 2), 
-(23, 1), 
-(24, 8), 
-(25, 6), 
-(26, 38), 
-(27, 2), 
-(28, 17), 
-(29, 83), 
-(30, 1);
 
-INSERT INTO program_to_actor (program_id, actor_id)
-VALUES 
+
+
+
+
+INSERT INTO program_to_streaming (program_id, streaming_platform_id) VALUES
+(1, 4),
+(2, 12),
+(3, 2),
+(4, 4),
+(5, 12),
+(6, 12),
+(7, 4),
+(8, 4),
+(9, 4),
+(10, 12),
+(11, 6),
+(12, 5),
+(13, 4),
+(14, 7),
+(15, 2),
+(16, 4),
+(17, 4),
+(18, 4),
+(19, 7),
+(20, 4),
+(21, 3),
+(22, 4),
+(23, 4),
+(24, 7),
+(25, 4),
+(26, 2),
+(27, 4),
+(28, 7),
+(29, 7),
+(30, 13);
+
+
+
+
+INSERT INTO program_to_actor (program_id, actor_id) VALUES
+-- Home Alone
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
+-- Elf
 (2, 6), (2, 7), (2, 8), (2, 9), (2, 10),
+-- The Santa Clause
 (3, 11), (3, 12), (3, 13), (3, 14), (3, 15),
+-- The Grinch
 (4, 16), (4, 17), (4, 18), (4, 19), (4, 20),
+-- A Christmas Story
 (5, 21), (5, 22), (5, 23), (5, 24), (5, 25),
+-- Christmas Vacation
 (6, 21), (6, 26), (6, 27), (6, 28), (6, 29),
+-- Miracle on 34th Street
 (7, 30), (7, 31), (7, 32), (7, 33), (7, 34),
+-- Jingle All the Way
 (8, 35), (8, 36), (8, 37), (8, 38), (8, 39),
+-- Klaus
 (9, 40), (9, 41), (9, 42), (9, 43), (9, 44),
+-- The Polar Express
 (10, 45), (10, 46), (10, 47), (10, 48), (10, 49),
+-- Rudolph the Red-Nosed Reindeer
 (11, 50), (11, 51), (11, 52), (11, 53), (11, 54),
+-- Frosty the Snowman
 (12, 50), (12, 51), (12, 52), (12, 53), (12, 55),
+-- Scrooged
 (13, 56), (13, 57), (13, 58), (13, 59), (13, 60),
+-- A Charlie Brown Christmas
 (14, 61), (14, 62), (14, 63), (14, 64), (14, 65),
-(15, 66), (15, 67), (15, 68), (15, 69), (15, 70);
+-- The Christmas Chronicles
+(15, 66), (15, 67), (15, 68), (15, 69), (15, 70),
+-- The Holiday
+(16, 1), (16, 2), (16, 3), (16, 4), (16, 5),
+-- Bad Santa
+(17, 6), (17, 7), (17, 8), (17, 9), (17, 10),
+-- How the Grinch Stole Christmas
+(18, 11), (18, 12), (18, 13), (18, 14), (18, 15),
+-- Holiday Inn
+(19, 16), (19, 17), (19, 18), (19, 19), (19, 20),
+-- White Christmas
+(20, 21), (20, 22), (20, 23), (20, 24), (20, 25),
+-- The Muppets Christmas Carol
+(21, 21), (21, 26), (21, 27), (21, 28), (21, 29),
+-- The Star
+(22, 30), (22, 31), (22, 32), (22, 33), (22, 34),
+-- Noel
+(23, 35), (23, 36), (23, 37), (23, 38), (23, 39),
+-- Last Christmas
+(24, 40), (24, 41), (24, 42), (24, 43), (24, 44),
+-- Spirited
+(25, 45), (25, 46), (25, 47), (25, 48), (25, 49),
+-- Deck the Halls
+(26, 50), (26, 51), (26, 52), (26, 53), (26, 54),
+-- The Christmas Prince
+(27, 50), (27, 51), (27, 52), (27, 53), (27, 55),
+-- Arthur Christmas
+(28, 56), (28, 57), (28, 58), (28, 59), (28, 60),
+-- It's a Wonderful Life
+(29, 61), (29, 62), (29, 63), (29, 64), (29, 65),
+-- Santa Claus is Coming to Town
+(30, 66), (30, 67), (30, 68), (30, 69), (30, 70);
 
-INSERT INTO program_to_director (program_id, director_id)
-VALUES (1, 1),
+
+
+
+INSERT INTO program_to_director (program_id, director_id) VALUES
+(1, 1),
 (2, 2),
 (3, 3),
 (4, 4),
@@ -286,4 +450,3 @@ VALUES (1, 1),
 (28, 28),
 (29, 29),
 (30, 30);
-

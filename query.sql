@@ -10,7 +10,7 @@ ORDER BY last_name;
 
 --SELECT EVERY PROGRAM THAT BEGINS WITH THE LETTER 'G'
 Select title FROM program
-Where title LIKE 'E%';
+Where title LIKE 'G%';
 
 
 
@@ -25,6 +25,7 @@ Where title LIKE 'E%';
  SELECT p.program_id, p.title, g.genre 
  FROM program p
  JOIN program_to_genre mtg ON p.program_id = mtg.program_id
- JOIN genre g ON mtg.genre_id = g.genre_id;
+ JOIN genre g ON mtg.genre_id = g.genre_id
+ WHERE g.genre = 'Comedy';
  
 
