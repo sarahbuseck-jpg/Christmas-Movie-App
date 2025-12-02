@@ -4,7 +4,7 @@ const router = express.Router()
 const { actorDao: dao } = require ('../../daos/dao')
 
     router.get('/',( req, res)=>{
- dao.findALL(req,res,dao.table)
+ dao.findAll(req,res,dao.table)
     })
 
-    module.export = router
+    module.exports = router
