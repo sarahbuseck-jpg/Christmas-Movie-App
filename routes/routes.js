@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     res.json({
         message: "ChristmasDB API Root",
         endpoints: {
-            allActors: `http://localhost:${PORT}/api/actor`
+            allActors: `http://localhost:${PORT}/api/actors`
         }
     });
 });
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 
 
-router.use('/api/actor', require ('./api/actorRoutes'))
+router.use('/actors', require ('./api/actorRoutes'))
 
 
 
