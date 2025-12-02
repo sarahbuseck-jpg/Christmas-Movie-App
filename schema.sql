@@ -95,3 +95,8 @@ CREATE TABLE program_to_director(
 );
 
 
+CREATE TABLE IF NOT EXISTS streaming (
+    streaming_id INT PRIMARY KEY AUTO_INCREMENT,
+    streaming_name VARCHAR(100) NOT NULL
+);
+

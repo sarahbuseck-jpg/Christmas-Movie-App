@@ -1,18 +1,3 @@
-INSERT INTO genre (genre)
-VALUES
-('family'),
-('comedy'),
-('animation'),
-('fantasy'),
-('adventure'),
-('musical'),
-('drama'),
-('romance'),
-('children'),
-('holiday');
-
-
-
 INSERT INTO production (name) VALUES
 ('20th Century Fox'),
 ('New Line Cinema'),
@@ -232,19 +217,19 @@ VALUES
 
 
 
-INSERT INTO program_to_streaming (program_id, platform) VALUES
-(1, 'disney plus'),
-(2, 'hbomax'),
-(3, 'disney plus'),
-(4, 'netflix'),
-(5, 'hbomax'),
-(6, 'hbomax'),
-(14, 'amazon prime'),
-(18, 'netflix'),
-(19, 'amazon prime'),
-(24, 'amazon prime'),
-(28, 'amazon prime'),
-(30, 'apple tv plus');
+-- Populate streaming services
+INSERT INTO streaming (streaming_name) VALUES
+('Netflix'),
+('Disney+'),
+('HBO Max'),
+('Amazon Prime Video'),
+('Hulu');
+
+
+
+
+
+
 
 
 INSERT INTO program (title, rating, runtime, nationality, yr_released, budget, gross, production_id, showing, poster) VALUES
@@ -319,39 +304,37 @@ INSERT INTO program_to_genre (program_id, genre_id) VALUES
 
 
 
-INSERT INTO program_to_streaming (program_id, streaming_platform_id) VALUES
-(1, 4),
-(2, 12),
-(3, 2),
-(4, 4),
-(5, 12),
-(6, 12),
-(7, 4),
-(8, 4),
-(9, 4),
-(10, 12),
-(11, 6),
-(12, 5),
-(13, 4),
-(14, 7),
-(15, 2),
-(16, 4),
-(17, 4),
-(18, 4),
-(19, 7),
-(20, 4),
-(21, 3),
-(22, 4),
-(23, 4),
-(24, 7),
-(25, 4),
-(26, 2),
-(27, 4),
-(28, 7),
-(29, 7),
-(30, 13);
-
-
+INSERT INTO program_to_streaming (program_id, platform) VALUES
+(1, 'netflix'),
+(2, 'disney plus'),
+(3, 'hbomax'),
+(4, 'amazon prime'),
+(5, 'hulu'),
+(6, 'netflix'),
+(7, 'disney plus'),
+(8, 'hbomax'),
+(9, 'amazon prime'),
+(10, 'hulu'),
+(11, 'netflix'),
+(12, 'disney plus'),
+(13, 'hbomax'),
+(14, 'amazon prime'),
+(15, 'hulu'),
+(16, 'netflix'),
+(17, 'disney plus'),
+(18, 'hbomax'),
+(19, 'amazon prime'),
+(20, 'hulu'),
+(21, 'netflix'),
+(22, 'disney plus'),
+(23, 'hbomax'),
+(24, 'amazon prime'),
+(25, 'hulu'),
+(26, 'netflix'),
+(27, 'disney plus'),
+(28, 'hbomax'),
+(29, 'amazon prime'),
+(30, 'hulu');
 
 
 INSERT INTO program_to_actor (program_id, actor_id) VALUES
