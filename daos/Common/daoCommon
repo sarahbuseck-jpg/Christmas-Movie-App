@@ -5,7 +5,7 @@ const daoCommon = {
 
     findAll: async (req, res, table) => {
         try {
-            // Await the query without callback
+            
             const [rows] = await connect.query(`SELECT * FROM ${table};`);
 
             if (rows.length === 1) {
@@ -16,12 +16,37 @@ const daoCommon = {
         } catch (error) {
             console.log(`Dao error: ${error}`);
             res.json({
-                message: 'error',
-                table: table,
-                error: error
-            });
+                "message": 'error',
+                'table':`${table}`,
+                'error' : error
+            })
         }
-    }
-};
+    },
+    findById: (res, table, id) => {
+      connect.query(
+           `SELECT * FROM ${table} WHERE ${table}_id = ?;`,
+        [id],
+      (error, rows) => {
+      
+                if (!error) {
+          res.json(...rows)
+        } else {
+        console.log(`DAO Error: ${error}`)
+        res.json({
+                "message": 'error',
+                'table':`${table}`,
+                'error' : error
+            })
+            }
+          }
+        )
+        }
+}
+      
+      
+    
 
-module.exports = daoCommon;
+
+
+
+module.exports = daoCommon
