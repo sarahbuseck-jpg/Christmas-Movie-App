@@ -1,8 +1,31 @@
-<%- include('partials/header', { title: "Home" }) %>
-<%- include('partials/navbar') %>
-<div class="text-center">
-    <h1 class="display-4 text-danger">🎅 Welcome to the Christmas DB</h1>
-    <p class="lead">Browse holiday-themed actors, programs, and more!</p>
+<%- include('./partials/header', { title: 'Home' }) %>
+
+<!-- HERO BANNER -->
+<section class="hero-banner position-relative">
+
+    <!-- Background Image -->
+    <img src="/images/banner/banner.webp" 
+     class="img-fluid rounded shadow mb-4"
+     alt="Christmas Banner">
+    <!-- Dark Overlay -->
+    <div class="overlay position-absolute top-0 start-0 w-100 h-100"
+        style="background: rgba(0,0,0,0.45);"></div>
+
+    <!-- Text Content -->
+    <div class="hero-text position-absolute top-50 start-50 translate-middle text-center text-white">
+        <h1 class="fw-bold display-4">🎄 Christmas Movie Database 🎬</h1>
+        <p class="lead">Explore holiday classics, actors, directors, and more.</p>
+    </div>
+
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="container mt-5">
+    <h2 class="text-center mb-3">Begin Browsing</h2>
+
+    <p class="text-center text-muted">
+        Use the navigation menu above to explore the Christmas movie universe.
+    </p>
 </div>
 
-<%- include('partials/footer') %>
+<%- include('./partials/footer') %>

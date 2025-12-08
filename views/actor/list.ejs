@@ -1,41 +1,36 @@
-<%- include('../partials/header', { title: "Actors" }) %>
-<%- include("../partials/navbar") %>
-<h1 class="mb-4 text-danger">🎭 Christmas Actors</h1>
+<%- include('../partials/header', { title: 'Actors' }) %>
+<a href="/actors/add" class="btn btn-success mb-3">+ Add Actor</a>
 
-<div class="row">
+<h2 class="text-center mb-4">Actors</h2>
 
-    <% if (!actors || !Array.isArray(actors) || actors.length === 0) { %>
-        <div class="alert alert-warning">No actors found.</div>
-    <% } else { %>
+<div class="row g-4">
 
-        <% actors.forEach(actor => { %>
+<% actors.forEach(a => { %>
+    <div class="col-md-3">
+        <div class="card shadow border-0 rounded-4 text-center">
 
-            <div class="col-md-4 mb-4">
+            <% if (a.img_url) { %>
+                <img 
+                    src="<%= a.img_url %>" 
+                    class="card-img-top rounded-top-4"
+                    alt="<%= a.first_name %>"
+                    style="height:250px; object-fit:cover;">
+            <% } else { %>
+                <img 
+                    src="/images/default_actor.jpg" 
+                    class="card-img-top rounded-top-4"
+                    style="height:250px; object-fit:cover;">
+            <% } %>
 
-                <div class="card shadow-sm">
-
-                    <img 
-                        src="/images/<%= actor.img_url || 'default.jpg' %>" 
-                        class="card-img-top"
-                        alt="<%= actor.first_name %>">
-
-                    <div class="card-body">
-
-                        <h5 class="card-title">
-                            <%= actor.first_name %> <%= actor.last_name || '' %>
-                        </h5>
-
-                        <p class="card-text">
-                            No description available
-                        </p>
-
-                    </div>
-
-                </div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold">
+                    <%= a.first_name %> <%= a.last_name %>
+                </h5>
             </div>
 
-        <% }) %>
-    <% } %>
+        </div>
+    </div>
+<% }) %>
 
 </div>
 

@@ -55,5 +55,5 @@ router.get('/html/list', async (req,res)=>{
         res.status(500).send("Server Error");
     }
 });
-
+<img src="<%= actor.img_url %>" class="img-fluid rounded" alt="actor"></img>
 module.exports = router;
