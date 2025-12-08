@@ -1,0 +1,23 @@
+<%- include('../partials/header', { title: "Actors" }) %>
+
+<h2>Actors</h2>
+
+<table class="table table-striped">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+</tr>
+
+<% actors.forEach(a => { %>
+<tr>
+    <td><a href="/actors/<%= a.actor_id %>"><%= a.actor_id %></a></td>
+    <td><%= a.first_name %> <%= a.last_name %></td>
+</tr>
+<% }) %>
+
+</table>
+
+<a class="btn btn-success" href="/actors/add">Add Actor</a>
+
+<%- include('../partials/footer') %>

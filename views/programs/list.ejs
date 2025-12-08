@@ -1,0 +1,26 @@
+<%- include('../partials/header', { title: "Programs" }) %>
+
+<h2>Programs</h2>
+
+<div class="row">
+
+<% programs.forEach(p => { %>
+<div class="col-md-4 mb-3">
+
+<div class="card">
+
+<img src="/images/<%= p.img_url %>" class="card-img-top">
+
+<div class="card-body">
+<h5 class="card-title"><%= p.title %></h5>
+<p>Rating: <%= p.program_rating %></p>
+<a href="/programs/<%= p.program_id %>" class="btn btn-sm btn-primary">View</a>
+</div>
+
+</div>
+</div>
+<% }) %>
+
+</div>
+
+<%- include('../partials/footer') %>

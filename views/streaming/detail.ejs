@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+<h2><%= streaming.name %></h2>
+
+<% if (streaming.programs && streaming.programs.length) { %>
+<h4 class="mt-3">Programs on this platform</h4>
+
+<ul>
+<% streaming.programs.forEach(p => { %>
+<li>
+  <a href="/programs/<%= p.program_id %>">
+    <%= p.title %>
+  </a>
+</li>
+<% }) %>
+</ul>
+<% } else { %>
+<p>No programs found for this platform.</p>
+<% } %>
+
+<a class="btn btn-secondary mt-3" href="/streaming">Back</a>
+
+<%- include('../partials/footer') %>

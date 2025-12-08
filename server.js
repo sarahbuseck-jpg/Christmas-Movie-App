@@ -1,14 +1,23 @@
 const express = require('express');
-const app = express();
-const apiRoutes = require('./routes/router');
-
+const path = require('path');
 const helmet = require('helmet');
 const cors = require('cors');
 
-// PORT (only one declaration)
+const app = express();
+const htmlRoutes = require('./routes/htmlRoutes');
+const apiRoutes  = require('./routes/router'); // your existing api router
+
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
+/* ---------------------------
+   View Engine (EJS)
+---------------------------- */
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+/* ---------------------------
+   Security middleware
+---------------------------- */
 app.use(helmet.contentSecurityPolicy({
   useDefaults: true,
   crossOriginResourcePolicy: false,
@@ -19,20 +28,47 @@ app.use(helmet.contentSecurityPolicy({
   }
 }));
 
-// Basic middleware
+/* ---------------------------
+   Basic middleware
+---------------------------- */
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// API routes
-app.use('/api', apiRoutes);
+/* ---------------------------
+   Public images
+---------------------------- */
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-// Root route
+/* ---------------------------
+   API routes
+---------------------------- */
+app.use('/api', apiRoutes);
+/* ---------------------------
+   Home page using EJS
+---------------------------- */
 app.get('/', (req, res) => {
-  res.send('Welcome to ChristmasDB!');
+  res.render('home');   // renders views/home.ejs
 });
 
-// Start server
+/* ---------------------------
+   404 page
+---------------------------- */
+app.use((req, res) => {
+    res.status(404).render('errors/404');
+});
+
+/* ---------------------------
+   Start server
+---------------------------- */
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.use((req,res)=>{
+    res.status(404).render('404');
+});
+/*
+------HtmlRoutes----------
+app.use('/', htmlRoutes);
+*/

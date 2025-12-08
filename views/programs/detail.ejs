@@ -1,0 +1,14 @@
+<%- include('../partials/header', { title: program.title }) %>
+
+<h2><%= program.title %></h2>
+
+<img class="img-fluid mb-3" src="/images/<%= program.img_url %>">
+
+<p><b>Released:</b> <%= program.yr_released %></p>
+<p><b>Runtime:</b> <%= program.runtime %> minutes</p>
+<p><b>Format:</b> <%= program.format %></p>
+<p><b>Rating:</b> <%= program.program_rating %></p>
+
+<p><%= program.description %></p>
+
+<%- include('../partials/footer') %>

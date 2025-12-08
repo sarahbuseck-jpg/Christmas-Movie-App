@@ -1,0 +1,29 @@
+<%- include('../partials/header', { title: 'Add Program' }) %>
+
+<h2>Add Program</h2>
+
+<form method="POST">
+
+<label>Title</label>
+<input class="form-control" name="title">
+
+<label>Year</label>
+<input class="form-control" name="yr_released">
+
+<label>Runtime</label>
+<input class="form-control" name="runtime">
+
+<label>Format</label>
+<input class="form-control" name="format">
+
+<label>Rating</label>
+<input class="form-control" name="program_rating">
+
+<label>Description</label>
+<textarea class="form-control" name="description"></textarea>
+
+<button class="btn btn-primary mt-2">Save Program</button>
+
+</form>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+<h2>Streaming Platforms</h2>
+
+<a class="btn btn-primary mb-3" href="/streaming/add">Add Platform</a>
+
+<table class="table table-striped">
+
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Name</th>
+</tr>
+</thead>
+
+<tbody>
+<% streaming.forEach(s => { %>
+<tr>
+  <td><%= s.streaming_id %></td>
+  <td>
+    <a href="/streaming/<%= s.streaming_id %>">
+      <%= s.name %>
+    </a>
+  </td>
+</tr>
+<% }) %>
+</tbody>
+
+</table>
+
+<%- include('../partials/footer') %>

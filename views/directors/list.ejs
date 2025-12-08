@@ -1,0 +1,25 @@
+<%- include('../partials/header', { title: 'Directors' }) %>
+
+<h2>Directors</h2>
+
+<table class="table table-striped">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+</tr>
+
+<% directors.forEach(d => { %>
+<tr>
+    <td><%= d.director_id %></td>
+    <td>
+        <a href="/directors/<%= d.director_id %>">
+            <%= d.first_name %> <%= d.last_name %>
+        </a>
+    </td>
+</tr>
+<% }) %>
+
+</table>
+
+<%- include('../partials/footer') %>

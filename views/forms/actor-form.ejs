@@ -1,0 +1,21 @@
+<%- include('../partials/header', { title: "Add Actor" }) %>
+
+<h2>Add New Actor</h2>
+
+<form action="/actors/add" method="POST">
+
+<div class="mb-3">
+<label>First Name</label>
+<input class="form-control" name="first_name">
+</div>
+
+<div class="mb-3">
+<label>Last Name</label>
+<input class="form-control" name="last_name">
+</div>
+
+<button class="btn btn-primary">Save</button>
+
+</form>
+
+<%- include('../partials/footer') %>
