@@ -1,91 +1,85 @@
-const express = require('express');
-const path = require('path');
-const axios = require('axios');
-const helmet = require('helmet');
-const cors = require('cors');
-
-// create app
+const express = require("express");
+const path = require("path");
+const db = require("./dbconfig");
 const app = express();
 
-// view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// MIDDLEWARE
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
-// middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-
-// API routes
-const apiRoutes = require('./routes/router');
-app.use('/api', apiRoutes);
-
-// ------------------------------
-// Axios → Render Actors Page
-// ------------------------------
-app.get('/actors', async (req, res) => {
-    try {
-        const response = await axios.get('http://localhost:3000/api/actors');
-
-        res.render('actor/list', {
-            actors: response.data
-        });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error loading actors');
-    }
+// HOME PAGE
+app.get("/", (req, res) => {
+    res.render("home");
 });
 
-// home
-app.get('/', (req,res)=>{
-    res.render('home');
+/* ============================
+      ACTORS ROUTES
+============================ */
+app.get("/actors", async (req, res) => {
+    const [actors] = await db.query("SELECT * FROM actors");
+    res.render("actor/list", { actors });
 });
 
-app.get('/actors/add', (req, res) => {
-    res.render('actor/add');
+app.get("/actors/add", (req, res) => {
+    res.render("actor/add");
 });
 
-app.post('/actors/add', async (req, res) => {
-    const { actorName, age, image } = req.body;
-
-    try {
-        await axios.post('http://localhost:3000/api/actors', {
-            actorName,
-            age,
-            image
-        });
-
-        res.redirect('/actors'); // redirect back to the actors list
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Error saving actor");
-    }
-});
-app.get("/programs", async (req,res)=>{
-    try {
-        const response = await axios.get("http://localhost:3000/api/programs");
-
-        res.render("program/list", {
-            programs: response.data
-        });
-
-    } catch(err) {
-        console.error(err);
-        res.status(500).send("Error loading programs");
-    }
+app.post("/actors/add", async (req, res) => {
+    const { first_name, last_name } = req.body;
+    await db.query("INSERT INTO actors (first_name, last_name) VALUES (?, ?)", [first_name, last_name]);
+    res.redirect("/actors");
 });
 
-
-
-// 404
-app.use((req,res)=>{
-    res.status(404).render('errors/404');
+/* ============================
+     DIRECTORS ROUTES
+============================ */
+app.get("/directors", async (req, res) => {
+    const [directors] = await db.query("SELECT * FROM directors");
+    res.render("directors/list", { directors });
 });
 
-// start
-app.listen(3000, ()=>{
-    console.log("Running on http://localhost:3000");
+/* ============================
+        GENRES ROUTES
+============================ */
+app.get("/genres", async (req, res) => {
+    const [genres] = await db.query("SELECT * FROM genres");
+    res.render("genres/list", { genres });
 });
 
+/* ============================
+       PROGRAMS ROUTES
+============================ */
+app.get("/programs", async (req, res) => {
+    const [programs] = await db.query("SELECT * FROM programs");
+    res.render("programs/list", { programs });
+});
+
+/* ============================
+      STREAMING ROUTES
+============================ */
+app.get("/streaming", async (req, res) => {
+    const [streaming] = await db.query("SELECT * FROM streaming");
+    res.render("streaming/list", { streaming });
+});
+
+/* ============================
+     PRODUCTION ROUTES
+============================ */
+app.get("/production", async (req, res) => {
+    const [production] = await db.query("SELECT * FROM production");
+    res.render("production/list", { production });
+});
+
+/* ============================
+         404 ERROR
+============================ */
+app.use((req, res) => {
+    res.status(404).render("errors/404");
+});
+
+// SERVER LISTEN
+app.listen(3000, () => {
+    console.log("Server running at http://localhost:3000");
+});

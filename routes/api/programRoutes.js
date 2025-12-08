@@ -49,5 +49,42 @@ router.get('/streaming/:platform', async (req, res) => {
 router.get('/:id', async (req, res) => {
   await programDao.findById(res, req.params.id);
 });
+app.get('/directors', async (req,res)=>{
+    try {
+        const response = await axios.get('http://localhost:3000/api/directors');
+        res.render("directors/list", { directors: response.data });
+    } 
+    catch(err) {
+        console.error(err);
+        res.status(500).send("Error loading directors");
+    }
+});
 
+// ------------------------------
+// Genres Page
+// ------------------------------
+app.get('/genres', async (req,res)=>{
+    try {
+        const response = await axios.get('http://localhost:3000/api/genres');
+        res.render("genres/list", { genres: response.data });
+    } 
+    catch(err) {
+        console.error(err);
+        res.status(500).send("Error loading genres");
+    }
+});
+
+// ------------------------------
+// Streaming Platforms Page
+// ------------------------------
+app.get('/streamings', async (req,res)=>{
+    try {
+        const response = await axios.get('http://localhost:3000/api/streamings');
+        res.render("streamings/list", { streamings: response.data });
+    } 
+    catch(err) {
+        console.error(err);
+        res.status(500).send("Error loading streamings");
+    }
+});
 module.exports = router;

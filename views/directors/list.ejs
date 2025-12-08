@@ -1,21 +1,25 @@
 <%- include('../partials/header', { title: 'Directors' }) %>
+<%- include('../partials/navbar') %>
 
 <h2>Directors</h2>
 
 <table class="table table-striped">
-
 <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Age</th>
+    <th>Image</th>
 </tr>
 
 <% directors.forEach(d => { %>
 <tr>
-    <td><%= d.director_id %></td>
+    <td><%= d.id %></td>
+    <td><%= d.name %></td>
+    <td><%= d.age %></td>
     <td>
-        <a href="/directors/<%= d.director_id %>">
-            <%= d.first_name %> <%= d.last_name %>
-        </a>
+        <% if (d.image) { %>
+            <img src="/images/<%= d.image %>" width="80">
+        <% } %>
     </td>
 </tr>
 <% }) %>

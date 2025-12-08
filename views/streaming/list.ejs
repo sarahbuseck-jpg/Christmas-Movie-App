@@ -1,31 +1,21 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header', { title: 'Streamings' }) %>
 
-<h2>Streaming Platforms</h2>
-
-<a class="btn btn-primary mb-3" href="/streaming/add">Add Platform</a>
+<h2>Streamings</h2>
 
 <table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Website</th>
+    </tr>
 
-<thead>
-<tr>
-  <th>ID</th>
-  <th>Name</th>
-</tr>
-</thead>
-
-<tbody>
-<% streaming.forEach(s => { %>
-<tr>
-  <td><%= s.streaming_id %></td>
-  <td>
-    <a href="/streaming/<%= s.streaming_id %>">
-      <%= s.name %>
-    </a>
-  </td>
-</tr>
-<% }) %>
-</tbody>
-
+    <% streamings.forEach(s => { %>
+    <tr>
+        <td><%= s.id %></td>
+        <td><%= s.name %></td>
+        <td><a href="<%= s.website %>" target="_blank"><%= s.website %></a></td>
+    </tr>
+    <% }) %>
 </table>
 
 <%- include('../partials/footer') %>

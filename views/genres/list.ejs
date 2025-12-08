@@ -2,10 +2,18 @@
 
 <h2>Genres</h2>
 
-<ul>
-<% genres.forEach(g => { %>
-    <li><%= g.name %></li>
-<% }) %>
-</ul>
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+
+    <% genres.forEach(g => { %>
+    <tr>
+        <td><%= g.id %></td>
+        <td><%= g.name %></td>
+    </tr>
+    <% }) %>
+</table>
 
 <%- include('../partials/footer') %>

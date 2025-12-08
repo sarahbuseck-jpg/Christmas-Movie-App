@@ -4,7 +4,7 @@
 
 <% if (streaming.programs && streaming.programs.length) { %>
 <h4 class="mt-3">Programs on this platform</h4>
-
+<%- include("../partials/navbar") %>
 <ul>
 <% streaming.programs.forEach(p => { %>
 <li>
