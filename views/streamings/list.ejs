@@ -1,19 +1,17 @@
 <%- include('../partials/header', { title: 'Streamings' }) %>
 
-<h2>Streamings</h2>
+<h2>Streaming Platforms</h2>
 
 <table class="table table-striped">
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Website</th>
     </tr>
 
     <% streamings.forEach(s => { %>
     <tr>
-        <td><%= s.id %></td>
-        <td><%= s.name %></td>
-        <td><a href="<%= s.website %>" target="_blank"><%= s.website %></a></td>
+        <td><%= s.streaming_id %></td>
+        <td><%= s.streaming_name %></td>
     </tr>
     <% }) %>
 </table>

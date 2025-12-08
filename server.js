@@ -65,16 +65,18 @@ app.get("/programs", async (req, res) => {
 
 app.get("/streamings", async (req, res) => {
     const [streamings] = await db.query("SELECT * FROM streamings");
-    res.render("streaming/list", { streamings });
+    res.render("streamings/list", { streamings });
 });
-
 /* ============================
      PRODUCTION ROUTES
 ============================ */
 app.get("/productions", async (req, res) => {
     const [productions] = await db.query("SELECT * FROM productions");
-    res.render("production/list", { productions });
+    res.render("productions/list", { productions });
 });
+
+
+
 
 /* ============================
          404 ERROR
