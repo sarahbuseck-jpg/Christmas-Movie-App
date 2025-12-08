@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const db = require("./dbconfig");
+const db = require('./config/dbconfig');
 const app = express();
 
 // MIDDLEWARE
@@ -28,7 +28,10 @@ app.get("/actors/add", (req, res) => {
 
 app.post("/actors/add", async (req, res) => {
     const { first_name, last_name } = req.body;
-    await db.query("INSERT INTO actors (first_name, last_name) VALUES (?, ?)", [first_name, last_name]);
+    await db.query("INSERT INTO actors(first_name, last_name) VALUES (?, ?)", [
+        first_name,
+        last_name
+    ]);
     res.redirect("/actors");
 });
 
@@ -49,27 +52,28 @@ app.get("/genres", async (req, res) => {
 });
 
 /* ============================
-       PROGRAMS ROUTES
+       PROGRAM ROUTES
 ============================ */
 app.get("/programs", async (req, res) => {
-    const [programs] = await db.query("SELECT * FROM programs");
+    const [programs] = await db.query("SELECT * FROM program");
     res.render("programs/list", { programs });
 });
 
 /* ============================
       STREAMING ROUTES
 ============================ */
-app.get("/streaming", async (req, res) => {
-    const [streaming] = await db.query("SELECT * FROM streaming");
-    res.render("streaming/list", { streaming });
+
+app.get("/streamings", async (req, res) => {
+    const [streamings] = await db.query("SELECT * FROM streamings");
+    res.render("streaming/list", { streamings });
 });
 
 /* ============================
      PRODUCTION ROUTES
 ============================ */
-app.get("/production", async (req, res) => {
-    const [production] = await db.query("SELECT * FROM production");
-    res.render("production/list", { production });
+app.get("/productions", async (req, res) => {
+    const [productions] = await db.query("SELECT * FROM productions");
+    res.render("production/list", { productions });
 });
 
 /* ============================
