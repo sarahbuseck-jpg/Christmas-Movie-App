@@ -1,47 +1,59 @@
 const express = require('express');
 const router = express.Router();
-const actorDao = require('../../daos/api/actorDao')
+const actorDao = require('../../daos/api/actorDao');
 
-// GET /api/actors/search?first_name=...&last_name=...
-router.get('/search', async (req, res) => {
-  await actorDao.search(req, res);
+// SEARCH
+router.get('/search', async (req,res)=>{
+    await actorDao.search(req,res);
 });
 
-// GET /api/actors/sort/:column
-router.get('/sort/:column', async (req, res) => {
-  await actorDao.sort(res, req.params.column);
+// SORT
+router.get('/sort/:column', async (req,res)=>{
+    await actorDao.sort(res, req.params.column);
 });
 
-// GET /api/actors/:id/movies
-router.get('/:id/movies', async (req, res) => {
-  await actorDao.findActorMovies(res, req.params.id);
+// ACTOR + MOVIES
+router.get('/:id/movies', async (req,res)=>{
+    await actorDao.findActorMovies(res, req.params.id);
 });
 
-// GET /api/actors/:id
-router.get('/:id', async (req, res) => {
-  await actorDao.findById(res, req.params.id);
+// CREATE ACTOR
+router.post('/', async (req,res)=>{
+    try {
+        const newActor = await actorDao.create(req.body);
+        res.status(201).json(newActor);
+    } catch(err){
+        res.status(500).json({error:err.message});
+    }
 });
 
-// GET /api/actors - clickable HTML (should be last)
-router.get('/', async (req, res) => {
-  try {
-    const actors = await actorDao.findAllRaw(); // Make sure this exists in actorDao
+// GET ONE ACTOR
+router.get('/:id', async (req,res)=>{
+    await actorDao.findById(res, req.params.id);
+});
 
-    const html = actors.map(actor => `
-      <div style="margin-bottom: 20px;">
-        <h3>${actor.first_name} ${actor.last_name}</h3>
-        <p>ID: <a href="/api/actors/${actor.actor_id}">${actor.actor_id}</a></p>
-        <p>Image: <a href="/images/${actor.img_url}" target="_blank">${actor.img_url}</a></p>
-        <p>Created: ${actor.date_created}</p>
-        <p>Last Update: ${actor.last_update}</p>
-      </div>
-    `).join('');
+// GET ALL ACTORS (JSON)
+router.get('/', async (req,res)=>{
+    await actorDao.findAll(res);
+});
 
-    res.send(html);
+// OPTIONAL HTML LIST (last!)
+router.get('/html/list', async (req,res)=>{
+    try {
+        const actors = await actorDao.findAllRaw();
 
-  } catch (error) {
-    res.status(500).send('<h1>Server Error</h1>');
-  }
+        const html = actors.map(a => `
+            <div>
+                <h3>${a.first_name} ${a.last_name}</h3>
+                <img src="/images/${a.img_url}" width="150">
+            </div>
+        `).join('');
+
+        res.send(html);
+
+    } catch(err){
+        res.status(500).send("Server Error");
+    }
 });
 
 module.exports = router;

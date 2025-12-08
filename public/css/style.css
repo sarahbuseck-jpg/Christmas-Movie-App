@@ -1,0 +1,22 @@
+body {
+    background: #fff8f8; /* soft Christmas background */
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+footer p {
+    color: #aa0000;
+}

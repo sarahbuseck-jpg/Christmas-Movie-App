@@ -1,11 +1,12 @@
-<%- include('partials/header') %>
+<%- include('partials/header', {title: "Home"}) %>
 
-<h2>Welcome to ChristmasDB</h2>
-<p>Browse Christmas movies and holiday TV shows!</p>
+<div class="text-center">
+    <h1 class="display-4 text-danger">🎅 Welcome to the Christmas DB</h1>
+    <p class="lead">Browse holiday-themed actors and data!</p>
 
-<ul>
-<li><a href="/programs">View Programs</a></li>
-<li><a href="/actors">View Actors</a></li>
-</ul>
+    <a href="/actors" class="btn btn-danger btn-lg mt-3">
+        View Actors
+    </a>
+</div>
 
 <%- include('partials/footer') %>

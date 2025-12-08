@@ -1,23 +1,42 @@
 <%- include('../partials/header', { title: "Actors" }) %>
 
-<h2>Actors</h2>
+<h1 class="mb-4 text-danger">🎭 Christmas Actors</h1>
 
-<table class="table table-striped">
+<div class="row">
 
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-</tr>
+    <% if (!actors || !Array.isArray(actors) || actors.length === 0) { %>
+        <div class="alert alert-warning">No actors found.</div>
+    <% } else { %>
 
-<% actors.forEach(a => { %>
-<tr>
-    <td><a href="/actors/<%= a.actor_id %>"><%= a.actor_id %></a></td>
-    <td><%= a.first_name %> <%= a.last_name %></td>
-</tr>
-<% }) %>
+        <% actors.forEach(actor => { %>
 
-</table>
+            <div class="col-md-4 mb-4">
 
-<a class="btn btn-success" href="/actors/add">Add Actor</a>
+                <div class="card shadow-sm">
+
+                    <img 
+                        src="/images/<%= actor.img_url || 'default.jpg' %>" 
+                        class="card-img-top"
+                        alt="<%= actor.first_name %>">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            <%= actor.first_name %> <%= actor.last_name || '' %>
+                        </h5>
+
+                        <p class="card-text">
+                            No description available
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+
+        <% }) %>
+    <% } %>
+
+</div>
 
 <%- include('../partials/footer') %>

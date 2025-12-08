@@ -1,20 +1,26 @@
-<%- include('../partials/header', { title: 'Add Actor' }) %>
+<%- include('../partials/header', {title: "Add Actor"}) %>
 
-<h2>Add Actor</h2>
+<div class="container mt-4">
+    <h1 class="text-danger fw-bold mb-4">➕ Add New Actor</h1>
 
-<form action="/actors/add" method="POST">
+    <form action="/actors/add" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Actor Name</label>
+            <input type="text" class="form-control" name="actorName" required>
+        </div>
 
-    <div class="mb-3">
-        <label>First Name</label>
-        <input name="first_name" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control" name="age" required>
+        </div>
 
-    <div class="mb-3">
-        <label>Last Name</label>
-        <input name="last_name" class="form-control" required>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Image URL</label>
+            <input type="text" class="form-control" name="image">
+        </div>
 
-    <button class="btn btn-primary">Save Actor</button>
-</form>
+        <button class="btn btn-danger">Save Actor</button>
+    </form>
+</div>
 
 <%- include('../partials/footer') %>
