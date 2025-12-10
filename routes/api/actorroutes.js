@@ -1,59 +1,28 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const actorDao = require('../../daos/api/actorDao');
-
-// SEARCH
-router.get('/search', async (req,res)=>{
-    await actorDao.search(req,res);
+// ------------------------------------------------------
+// GET ALL ACTORS
+// ------------------------------------------------------
+router.get("/", (req, res) => {
+    actorDao.findAll((err, rows) => {
+        if (err) return res.status(500).json({ message: "Database error", err });
+        res.json(rows);
+    });
 });
 
-// SORT
-router.get('/sort/:column', async (req,res)=>{
-    await actorDao.sort(res, req.params.column);
-});
+// ------------------------------------------------------
+// GET ACTOR BY ID
+// ------------------------------------------------------
+router.get("/:id", (req, res) => {
+    const id = req.params.id;
 
-// ACTOR + MOVIES
-router.get('/:id/movies', async (req,res)=>{
-    await actorDao.findActorMovies(res, req.params.id);
-});
+    actorDao.findById(id, (err, rows) => {
+        if (err) return res.status(500).json({ message: "Database error", err });
 
-// CREATE ACTOR
-router.post('/', async (req,res)=>{
-    try {
-        const newActor = await actorDao.create(req.body);
-        res.status(201).json(newActor);
-    } catch(err){
-        res.status(500).json({error:err.message});
-    }
-});
+        if (rows.length === 0)
+            return res.status(404).json({ message: "Actor not found" });
 
-// GET ONE ACTOR
-router.get('/:id', async (req,res)=>{
-    await actorDao.findById(res, req.params.id);
-});
-
-// GET ALL ACTORS (JSON)
-router.get('/', async (req,res)=>{
-    await actorDao.findAll(res);
-});
-
-// OPTIONAL HTML LIST (last!)
-router.get('/html/list', async (req,res)=>{
-    try {
-        const actors = await actorDao.findAllRaw();
-
-        const html = actors.map(a => `
-            <div>
-                <h3>${a.first_name} ${a.last_name}</h3>
-                <img src="/images/${a.img_url}" width="150">
-            </div>
-        `).join('');
-
-        res.send(html);
-
-    } catch(err){
-        res.status(500).send("Server Error");
-    }
-});
-<img src="<%= actor.img_url %>" class="img-fluid rounded" alt="actor"></img>
-module.exports = router;
+        res.json(rows[0]);
+    });
+})

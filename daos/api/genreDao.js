@@ -1,4 +1,4 @@
-const con = require('../../config/dbconfig');
+const con = require('../config/dbconfig');
 const daoCommon = require('../Common/daoCommon');
 const { queryAction } = require('../../helpers/queryAction');
 const genreDao = {

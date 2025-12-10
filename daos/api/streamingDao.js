@@ -1,8 +1,8 @@
-const con = require('../../config/dbconfig');
+const con = require('../config/dbconfig');
 const daoCommon = require('../Common/daoCommon');
 
 const streamingDao = {
-  table: 'streaming',
+  table: 'streamings',
 
   // Shared CRUD
   findAll: (res) => daoCommon.findAll(res, streamingDao.table),

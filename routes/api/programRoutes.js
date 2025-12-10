@@ -3,88 +3,57 @@ const router = express.Router();
 
 const programDao = require('../../daos/api/programDao');
 
-// JSON
+// -------------------------------------
+// GET ALL PROGRAMS (JSON)
+// GET /api/programs
+// -------------------------------------
 router.get('/', async (req, res) => {
-  await programDao.findAll(res);
+    try {
+        await programDao.findAll(res);   // DAO handles res.json()
+    } catch (err) {
+        console.error("Error fetching programs:", err);
+        res.status(500).json({ error: "Server error" });
+    }
 });
 
-// HTML
-router.get('/html', async (req, res) => {
-  try {
-    const programs = await programDao.findAllRaw();
-
-    const html = programs.map(program => `
-      <div style="margin-bottom:20px;">
-        <h3>${program.title} (${program.rating})</h3>
-        <p>ID: <a href="/api/programs/${program.program_id}">${program.program_id}</a></p>
-        <p>${program.description || 'N/A'}</p>
-      </div>
-    `).join('');
-
-    res.send(`
-      <html>
-        <body>
-          <h1>Programs</h1>
-          ${html}
-        </body>
-      </html>
-    `);
-
-  } catch (err) {
-    res.status(500).send("Server error");
-  }
-});
-
-// rating
+// -------------------------------------
+// GET PROGRAMS BY RATING
+// GET /api/programs/rating/:rating
+// -------------------------------------
 router.get('/rating/:rating', async (req, res) => {
-  await programDao.findByRating(res, req.params.rating);
+    try {
+        await programDao.findByRating(res, req.params.rating);
+    } catch (err) {
+        console.error("Error fetching by rating:", err);
+        res.status(500).json({ error: "Server error" });
+    }
 });
 
-// streaming
+// -------------------------------------
+// GET PROGRAMS BY STREAMING PLATFORM
+// GET /api/programs/streaming/:platform
+// -------------------------------------
 router.get('/streaming/:platform', async (req, res) => {
-  await programDao.findByStreamingPlatform(res, req.params.platform);
+    try {
+        await programDao.findByStreamingPlatform(res, req.params.platform);
+    } catch (err) {
+        console.error("Error fetching by platform:", err);
+        res.status(500).json({ error: "Server error" });
+    }
 });
 
-// must be last
+// -------------------------------------
+// GET ONE PROGRAM BY ID
+// GET /api/programs/:id
+// -------------------------------------
 router.get('/:id', async (req, res) => {
-  await programDao.findById(res, req.params.id);
-});
-app.get('/directors', async (req,res)=>{
     try {
-        const response = await axios.get('http://localhost:3000/api/directors');
-        res.render("directors/list", { directors: response.data });
-    } 
-    catch(err) {
-        console.error(err);
-        res.status(500).send("Error loading directors");
+        await programDao.findById(res, req.params.id);
+    } catch (err) {
+        console.error("Error fetching program by ID:", err);
+        res.status(500).json({ error: "Server error" });
     }
 });
 
-// ------------------------------
-// Genres Page
-// ------------------------------
-app.get('/genres', async (req,res)=>{
-    try {
-        const response = await axios.get('http://localhost:3000/api/genres');
-        res.render("genres/list", { genres: response.data });
-    } 
-    catch(err) {
-        console.error(err);
-        res.status(500).send("Error loading genres");
-    }
-});
-
-// ------------------------------
-// Streaming Platforms Page
-// ------------------------------
-app.get('/streamings', async (req,res)=>{
-    try {
-        const response = await axios.get('http://localhost:3000/api/streamings');
-        res.render("streamings/list", { streamings: response.data });
-    } 
-    catch(err) {
-        console.error(err);
-        res.status(500).send("Error loading streamings");
-    }
-});
 module.exports = router;
+

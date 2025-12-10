@@ -1,108 +1,88 @@
 const express = require("express");
 const path = require("path");
-const db = require("./config/dbconfig");
+const cors = require("cors");
+const helmet = require("helmet");
 
 const app = express();
 
-// =============================
-// MIDDLEWARE
-// =============================
+// DB Config
+const db = require("./config/dbconfig");
+
+// API Routes
+const programApiRoutes = require("./routes/api/programRoutes");
+const actorApiRoutes = require("./routes/api/actorRoutes");
+
+
+// ---------------------------------------
+// Middleware
+// ---------------------------------------
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Body parser
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Public folder (static files: CSS, JS, images, etc.)
 app.use(express.static(path.join(__dirname, "public")));
 
-
-// =============================
-// HOME PAGE
-// =============================
-app.get("/", (req, res) => {
-    res.render("home");
-});
+app.use(helmet());
+app.use(cors());
 
 
-// =============================
-// ACTORS ROUTES
-// =============================
+// ---------------------------------------
+// API ROUTES
+// ---------------------------------------
+app.use("/api/programs", programApiRoutes);
+app.use("/api/actors", actorApiRoutes);
+
+// ---------------------------------------
+// HTML ROUTES
+// ---------------------------------------
+app.get("/", (req, res) => res.render("home"));
+
+// ACTOR LIST
 app.get("/actors", async (req, res) => {
-    const [actors] = await db.query("SELECT * FROM actors");
+    const [actors] = await db.query("SELECT * FROM actor");
     res.render("actor/list", { actors });
 });
 
-app.get("/actors/add", (req, res) => {
-    res.render("actor/add");
+// ADD ACTOR FORM
+app.get("/actors/new", (req, res) => {
+    res.render("actor/new");
 });
 
-app.post("/actors/add", async (req, res) => {
-    const { first_name, last_name } = req.body;
-    await db.query(
-        "INSERT INTO actors(first_name, last_name) VALUES (?, ?)",
-        [first_name, last_name]
-    );
-    res.redirect("/actors");
-});
-
-
-// =============================
-// DIRECTORS ROUTES
-// =============================
+// DIRECTORS
 app.get("/directors", async (req, res) => {
-    const [directors] = await db.query("SELECT * FROM directors");
+    const [directors] = await db.query("SELECT * FROM director");
     res.render("directors/list", { directors });
 });
 
-
-// =============================
-// GENRES ROUTES
-// =============================
-app.get("/genres", async (req, res) => {
-    const [genres] = await db.query("SELECT * FROM genres");
-    res.render("genres/list", { genres });
-});
-
-
-// =============================
-// PROGRAM ROUTES
-// =============================
+// PROGRAM LIST
 app.get("/programs", async (req, res) => {
     const [programs] = await db.query("SELECT * FROM program");
     res.render("programs/list", { programs });
 });
 
-
-// =============================
-// STREAMING ROUTES
-// =============================
-app.get("/streamings", async (req, res) => {
-    const [streamings] = await db.query("SELECT * FROM streamings");
-    res.render("streamings/list", { streamings });
+// STREAMING PLATFORMS
+app.get("/platforms", async (req, res) => {
+    const [platforms] = await db.query("SELECT * FROM streaming_platform");
+    res.render("platforms/list", { platforms });
 });
 
-
-// =============================
-// PRODUCTION ROUTES
-// =============================
-app.get("/productions", async (req, res) => {
-    const [productions] = await db.query("SELECT * FROM productions");
-    res.render("productions/list", { productions });
+// PRODUCERS
+app.get("/producers", async (req, res) => {
+    const [producers] = await db.query("SELECT * FROM producer");
+    res.render("producers/list", { producers });
 });
 
-
-// =============================
-// 404 PAGE
-// =============================
+// ---------------------------------------
+// 404 Page
+// ---------------------------------------
 app.use((req, res) => {
     res.status(404).render("errors/404");
 });
 
-
-// =============================
-// SERVER LISTEN
-// =============================
+// ---------------------------------------
+// Start Server
+// ---------------------------------------
 app.listen(3000, () => {
     console.log("Server running at http://localhost:3000");
 });
