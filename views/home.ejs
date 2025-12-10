@@ -1,29 +1,22 @@
 <%- include('./partials/header', { title: 'Home' }) %>
-
-<!-- HERO BANNER -->
-<section class="hero-banner position-relative">
-
-    <!-- Background Image -->
-    <img src="/images/banner/banner.webp" 
-     class="img-fluid rounded shadow mb-4"
-     alt="Christmas Banner">
-    <!-- Dark Overlay -->
-    <div class="overlay position-absolute top-0 start-0 w-100 h-100"
-        style="background: rgba(0,0,0,0.45);"></div>
-
-    <!-- Text Content -->
-    <div class="hero-text position-absolute top-50 start-50 translate-middle text-center text-white">
-        <h1 class="fw-bold display-4">🎄 Christmas Movie Database 🎬</h1>
-        <p class="lead">Explore holiday classics, actors, directors, and more.</p>
-    </div>
-
-</section>
-
+<style>
+    body {
+        background-image: url("/images/christmas program.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
 <!-- MAIN CONTENT -->
-<div class="container mt-5">
-    <h2 class="text-center mb-3">Begin Browsing</h2>
+<div class="container mt-5 text-center text-white">
+    <h1 class="fw-bold mb-4">🎄 Christmas Program Database 🎬</h1>
 
-    <p class="text-center text-muted">
+    <p class="lead mb-5">
+        Explore holiday classics, actors, directors, and more.
+    </p>
+
+    <h2 class="mb-3">Begin Browsing</h2>
+    <p class="text-muted">
         Use the navigation menu above to explore the Christmas movie universe.
     </p>
 </div>
