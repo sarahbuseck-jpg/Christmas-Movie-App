@@ -7,7 +7,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
 
     /* Background Image */
-    background: #fff8f8; /* fallback color */
+    background: #fff8f8;
     background-image: url("/images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -19,7 +19,7 @@ body {
 -----------------------------*/
 .navbar {
     position: relative;
-    z-index: 10; /* keeps navbar above snow */
+    z-index: 10;
 }
 
 .navbar-brand {
@@ -48,16 +48,34 @@ footer p {
 
 /* ----------------------------
    Snow Fix — VERY IMPORTANT
--------------
-/* Always keep real content above overlays */
+-----------------------------*/
+
+/* Always keep content above overlays */
 body, nav, .container, main, footer {
     position: relative;
     z-index: 10;
 }
 
-/* Snow elements MUST stay behind everything */
+/* Snow MUST stay behind everything */
 #snow-container,
 .snowflake {
     pointer-events: none !important;
     z-index: -1 !important;
+}
+
+/* Snowflake animation */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    opacity: 0.9;
+    animation-name: snowfall;
+    animation-timing-function: linear;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
 }

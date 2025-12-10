@@ -2,98 +2,112 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
+const db = require("./config/dbconfig");
 
 const app = express();
 
-// ---------------------------------------
-// Database Config
-// ---------------------------------------
-const db = require("./config/dbconfig");
+// ------------------------
+// HELMET FIX
+// ------------------------
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+                styleSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
+                imgSrc: ["'self'", "data:", "blob:"],
+                fontSrc: ["'self'", "https://cdn.jsdelivr.net"],
+            },
+        },
+    })
+);
 
-// ---------------------------------------
-// API Routes
-// ---------------------------------------
-const programApiRoutes = require("./routes/api/programRoutes");
-const actorApiRoutes = require("./routes/api/actorRoutes");
-
-// ---------------------------------------
-// Middleware (Correct Order!)
-// ---------------------------------------
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-
-// Security middleware FIRST
-app.use(helmet());
 app.use(cors());
-
-// Body parsers
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
 
-
-// ---------------------------------------
-// API ROUTES
-// ---------------------------------------
-app.use("/api/programs", programApiRoutes);
-app.use("/api/actors", actorApiRoutes);
+// View engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 
-// ---------------------------------------
-// HTML ROUTES
-// ---------------------------------------
-app.get("/", (req, res) => res.render("home"));
+// ------------------------------------------------------
+// HOME PAGE
+// ------------------------------------------------------
+app.get("/", (req, res) => {
+    res.render("home", { title: "Christmas DB" });
+});
 
-// ACTOR LIST
+
+// ------------------------------------------------------
+// ACTORS PAGE
+// ------------------------------------------------------
 app.get("/actors", async (req, res) => {
-    const [actors] = await db.query("SELECT * FROM actor");
-    res.render("actor/list", { actors });
+    const [actors] = await db.query("SELECT * FROM actors");
+    res.render("actor/list", { title: "Actors", actors });
 });
 
-// ADD ACTOR FORM
-app.get("/actors/new", (req, res) => {
-    res.render("actor/new");
-});
 
-// DIRECTORS
-app.get("/directors", async (req, res) => {
-    const [directors] = await db.query("SELECT * FROM director");
-    res.render("directors/list", { directors });
-});
-
-// PROGRAM LIST
+// ------------------------------------------------------
+// PROGRAMS PAGE
+// ------------------------------------------------------
 app.get("/programs", async (req, res) => {
-    const [programs] = await db.query("SELECT * FROM program");
-    res.render("programs/list", { programs });
-});
-
-// STREAMING PLATFORMS
-app.get("/platforms", async (req, res) => {
-    const [platforms] = await db.query("SELECT * FROM streaming_platform");
-    res.render("platforms/list", { platforms });
-});
-
-// PRODUCERS
-app.get("/producers", async (req, res) => {
-    const [producers] = await db.query("SELECT * FROM producer");
-    res.render("producers/list", { producers });
+    const [programs] = await db.query("SELECT * FROM programs");
+    res.render("programs/list", { title: "Programs", programs });
 });
 
 
-// ---------------------------------------
-// 404 Page
-// ---------------------------------------
+// ------------------------------------------------------
+// DIRECTORS PAGE
+// ------------------------------------------------------
+app.get("/directors", async (req, res) => {
+    const [directors] = await db.query("SELECT * FROM directors");
+    res.render("directors/list", { title: "Directors", directors });
+});
+
+
+// ------------------------------------------------------
+// GENRES PAGE
+// ------------------------------------------------------
+app.get("/genres", async (req, res) => {
+    const [genres] = await db.query("SELECT * FROM genres");
+    res.render("genres/list", { title: "Genres", genres });
+});
+
+
+// ------------------------------------------------------
+// STREAMINGS PAGE
+// ------------------------------------------------------
+app.get("/streamings", async (req, res) => {
+    const [streamings] = await db.query("SELECT * FROM streamings");
+    res.render("streamings/list", { title: "Streaming Platforms", streamings });
+});
+
+
+// ------------------------------------------------------
+// PRODUCTIONS PAGE
+// ------------------------------------------------------
+app.get("/productions", async (req, res) => {
+    const [productions] = await db.query("SELECT * FROM productions");
+    res.render("productions/list", { title: "Productions", productions });
+});
+
+
+// ------------------------------------------------------
+// 404 PAGE
+// ------------------------------------------------------
 app.use((req, res) => {
-    res.status(404).render("errors/404");
+    res.status(404).render("errors/404", { title: "Not Found" });
 });
 
 
-// ---------------------------------------
-// Start Server
-// ---------------------------------------
-app.listen(3000, () => {
-    console.log("Server running at <http://localhost:3000>");
-
-});
+// ------------------------------------------------------
+// START SERVER — NOTHING AFTER THIS LINE
+// ------------------------------------------------------
+app.listen(3000, () =>
+    console.log("Server running at http://localhost:3000")
+);

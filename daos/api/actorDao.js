@@ -1,72 +1,63 @@
-const con = require('../../config/dbconfig');
+const db = require("../../config/dbconfig");
 
-module.exports = {
+const actorDao = {
 
-    // ------------------------------------
+    // ------------------------------------------------------
     // GET ALL ACTORS
-    // ------------------------------------
-    findAll: async () => {
-        const [rows] = await con.execute("SELECT * FROM actors");
-        return rows;
+    // ------------------------------------------------------
+    findAll(callback) {
+        const sql = `
+            SELECT actor_id, first_name, last_name, img_url, date_created, last_update
+            FROM actors
+            ORDER BY actor_id ASC
+        `;
+        db.query(sql, callback);
     },
 
-    // ------------------------------------
+    // ------------------------------------------------------
     // GET ACTOR BY ID
-    // ------------------------------------
-    findById: async (actor_id) => {
-        const [rows] = await con.execute(
-            "SELECT * FROM actors WHERE actor_id = ?",
-            [actor_id]
-        );
-        return rows;
+    // ------------------------------------------------------
+    findById(id, callback) {
+        const sql = `
+            SELECT actor_id, first_name, last_name, img_url, date_created, last_update
+            FROM actors
+            WHERE actor_id = ?
+        `;
+        db.query(sql, [id], callback);
     },
 
-    // ------------------------------------
-    // SEARCH ACTORS BY NAME
-    // ------------------------------------
-    search: async (searchTerm) => {
-        const likeTerm = `%${searchTerm}%`;
-
-        const [rows] = await con.execute(
-            `SELECT *
-             FROM actors
-             WHERE first_name LIKE ? 
-                OR last_name LIKE ?`,
-            [likeTerm, likeTerm]
-        );
-
-        return rows;
+    // ------------------------------------------------------
+    // CREATE ACTOR
+    // ------------------------------------------------------
+    create(actor, callback) {
+        const sql = `
+            INSERT INTO actors (first_name, last_name, img_url)
+            VALUES (?, ?, ?)
+        `;
+        db.query(sql, [actor.first_name, actor.last_name, actor.img_url], callback);
     },
 
-    // ------------------------------------
-    // SORT ACTORS A–Z or Z–A
-    // ------------------------------------
-    sort: async (sortOrder) => {
-        const safeOrder = sortOrder === "asc" ? "ASC" : "DESC";
-
-        const [rows] = await con.execute(
-            `SELECT *
-             FROM actors
-             ORDER BY first_name ${safeOrder}`
-        );
-
-        return rows;
+    // ------------------------------------------------------
+    // UPDATE ACTOR
+    // ------------------------------------------------------
+    update(id, actor, callback) {
+        const sql = `
+            UPDATE actors
+            SET first_name = ?, 
+                last_name = ?, 
+                img_url = ?
+            WHERE actor_id = ?
+        `;
+        db.query(sql, [actor.first_name, actor.last_name, actor.img_url, id], callback);
     },
 
-    // ------------------------------------
-    // GET ALL PROGRAMS FOR AN ACTOR
-    // ------------------------------------
-    findActorMovies: async (actor_id) => {
-        const [rows] = await con.execute(
-            `SELECT p.*
-             FROM program p
-             INNER JOIN program_to_actor pa 
-                 ON p.program_id = pa.program_id
-             WHERE pa.actor_id = ?`,
-            [actor_id]
-        );
-
-        return rows;
+    // ------------------------------------------------------
+    // DELETE ACTOR
+    // ------------------------------------------------------
+    delete(id, callback) {
+        const sql = "DELETE FROM actors WHERE actor_id = ?";
+        db.query(sql, [id], callback);
     }
-
 };
+
+module.exports = actorDao;

@@ -1,34 +1,20 @@
-<%- include('../partials/header', { title: 'Programs' }) %>
+<%- include("../partials/header", { title: "Programs" }) %>
 
-<div class="container mt-4">
-    <h1 class="text-center mb-4">🎄 Christmas Programs</h1>
+<h1 class="mb-4 text-white">🎄 Programs</h1>
 
-    <div class="row g-4">
-        <% programs.forEach(program => { %>
-
-            <div class="col-md-4">
-                <div class="card shadow-lg border-0 rounded-4">
-
-                    <!-- Program Poster -->
-                    <img 
-                        src="<%= program.poster %>" 
-                        class="card-img-top"
-                        alt="<%= program.title %>"
-                        style="height: 250px; object-fit: cover;"
-                    >
-
-                    <div class="card-body text-center">
-                        <h5 class="fw-bold"><%= program.title %></h5>
-                        <p class="text-muted">
-                            <%= program.description || '' %>
-                        </p>
-                    </div>
-
+<div class="row">
+    <% programs.forEach(program => { %>
+        <div class="col-md-4 mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title"><%= program.title %></h5>
+                    <p class="card-text">
+                        Release Year: <%= program.release_year %>
+                    </p>
                 </div>
             </div>
-
-        <% }) %>
-    </div>
+        </div>
+    <% }) %>
 </div>
 
-<%- include('../partials/footer') %>
+<%- include("../partials/footer") %>
