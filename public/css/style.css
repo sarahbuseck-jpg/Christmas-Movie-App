@@ -1,3 +1,6 @@
+/* ----------------------------
+   Global Body Styling
+-----------------------------*/
 body {
     margin: 0;
     padding: 0;
@@ -8,11 +11,6 @@ body {
     background-image: url("/images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-body {
-    background-image: url("/images/christmas program.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
     background-attachment: fixed;
 }
 
@@ -21,7 +19,7 @@ body {
 -----------------------------*/
 .navbar {
     position: relative;
-    z-index: 10; /* above snow effect */
+    z-index: 10; /* keeps navbar above snow */
 }
 
 .navbar-brand {
@@ -49,34 +47,17 @@ footer p {
 }
 
 /* ----------------------------
-   Snow Animation
------------------------------*/
-@keyframes snowFall {
-    0% {
-        transform: translateY(0px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
+   Snow Fix — VERY IMPORTANT
+-------------
+/* Always keep real content above overlays */
+body, nav, .container, main, footer {
+    position: relative;
+    z-index: 10;
 }
 
+/* Snow elements MUST stay behind everything */
+#snow-container,
 .snowflake {
-    position: fixed;
-    top: -10px;
-    color: white;
-    pointer-events: none;
-    animation-name: snowFall;
-    animation-timing-function: linear;
-}
-
-#snow-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
+    pointer-events: none !important;
+    z-index: -1 !important;
 }

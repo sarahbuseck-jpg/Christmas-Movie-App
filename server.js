@@ -5,26 +5,33 @@ const helmet = require("helmet");
 
 const app = express();
 
-// DB Config
+// ---------------------------------------
+// Database Config
+// ---------------------------------------
 const db = require("./config/dbconfig");
 
+// ---------------------------------------
 // API Routes
+// ---------------------------------------
 const programApiRoutes = require("./routes/api/programRoutes");
 const actorApiRoutes = require("./routes/api/actorRoutes");
 
-
 // ---------------------------------------
-// Middleware
+// Middleware (Correct Order!)
 // ---------------------------------------
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
-
+// Security middleware FIRST
 app.use(helmet());
 app.use(cors());
+
+// Body parsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
 
 
 // ---------------------------------------
@@ -32,6 +39,7 @@ app.use(cors());
 // ---------------------------------------
 app.use("/api/programs", programApiRoutes);
 app.use("/api/actors", actorApiRoutes);
+
 
 // ---------------------------------------
 // HTML ROUTES
@@ -73,6 +81,7 @@ app.get("/producers", async (req, res) => {
     res.render("producers/list", { producers });
 });
 
+
 // ---------------------------------------
 // 404 Page
 // ---------------------------------------
@@ -80,9 +89,11 @@ app.use((req, res) => {
     res.status(404).render("errors/404");
 });
 
+
 // ---------------------------------------
 // Start Server
 // ---------------------------------------
 app.listen(3000, () => {
-    console.log("Server running at http://localhost:3000");
+    console.log("Server running at <http://localhost:3000>");
+
 });

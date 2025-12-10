@@ -26,3 +26,4 @@ router.get("/:id", (req, res) => {
         res.json(rows[0]);
     });
 })
+module.exports = router;
