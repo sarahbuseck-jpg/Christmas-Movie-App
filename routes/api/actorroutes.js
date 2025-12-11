@@ -2,41 +2,35 @@ const express = require("express");
 const router = express.Router();
 const actorDao = require("../../daos/api/actorDao");
 
-// ------------------------------------------------------
-// GET ALL ACTORS
-// ------------------------------------------------------
+// ADD PAGE
+router.get("/add-page", (req, res) => {
+    res.render("actor/add", { title: "Add Actor" });
+});
+
+// SEARCH PAGE
+router.get("/search-page", (req, res) => {
+    res.render("actor/search", { title: "Search Actors" });
+});
+
+// ADD ACTOR
+router.post("/add", (req, res) => {
+    actorDao.create(req, res);
+});
+
+// SEARCH ACTOR
+router.get("/search/:term", (req, res) => {
+  daoCommon.search(res, "actors", "last_name", req.params.term);
+});
+
+
+// GET ALL
 router.get("/", (req, res) => {
-    actorDao.findAll((err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err });
-        }
-        res.json(rows);
-    });
+    actorDao.findAll(res);
 });
 
-// ------------------------------------------------------
-// GET ACTOR BY ID
-// ------------------------------------------------------
+// GET BY ID
 router.get("/:id", (req, res) => {
-    const id = req.params.id;
-
-    actorDao.findById(id, (err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: "Database error", error: err });
-        }
-
-        if (!rows || rows.length === 0) {
-            return res.status(404).json({ message: "Actor not found" });
-        }
-
-        res.json(rows[0]);
-    });
+    actorDao.findById(res, req.params.id);
 });
-// SEARCH ACTOR BY///
-app.get("/api/actors/search/:term", async (req, res) => {
-    actorDao.searchByLastName(res, req.params.term);
-});
-
-
 
 module.exports = router;

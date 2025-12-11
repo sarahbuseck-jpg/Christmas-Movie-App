@@ -1,30 +1,39 @@
-const daoCommon = require("./daoCommon");
+const daoCommon = require("../Common/daoCommon");
 const con = require("../../config/dbconfig");
 
-const actorDao = {
-    ...daoCommon,
+const table = "actors"; // correct table name
 
-    // ------------------------------------------------------
-    // UNIQUE METHOD #1 - Find actors by last name
-    // ------------------------------------------------------
-    findByLastName: async (res, lastName) => {
+const actorDao = {
+
+    // ======================================================
+    // GENERIC DAO OPERATIONS
+    // ======================================================
+    findAll: (res) => daoCommon.findAll(res, table),
+    findById: (res, id) => daoCommon.findById(res, table, id),
+    search: (res, column, term) => daoCommon.search(res, table, column, term),
+    delete: (res, id) => daoCommon.delete(res, table, id),
+    update: (req, res) => daoCommon.update(req, res, table),
+    create: (req, res) => daoCommon.create(req, res, table),
+
+    // ======================================================
+    // CUSTOM SEARCH BY LAST NAME
+    // ======================================================
+    searchByLastName: async (res, term) => {
         try {
-            const sql = `
-                SELECT actor_id, first_name, last_name, img_url
-                FROM actors
-                WHERE last_name LIKE ?
-                ORDER BY last_name ASC
-            `;
-            const [rows] = await con.execute(sql, [`%${lastName}%`]);
+            const [rows] = await con.execute(
+                "SELECT actor_id, first_name, last_name, img_url FROM actors WHERE last_name LIKE ?",
+                [`%${term}%`]
+            );
             res.json(rows);
         } catch (err) {
-            res.status(500).json({ message: "error", err });
+            console.error("DAO ERROR searchByLastName:", err);
+            res.status(500).json({ message: "error", error: err.message });
         }
     },
 
-    // ------------------------------------------------------
-    // UNIQUE METHOD #2 - Find actors created after a date
-    // ------------------------------------------------------
+    // ======================================================
+    // FIND ACTORS CREATED AFTER DATE
+    // ======================================================
     findCreatedAfter: async (res, date) => {
         try {
             const sql = `
@@ -36,13 +45,14 @@ const actorDao = {
             const [rows] = await con.execute(sql, [date]);
             res.json(rows);
         } catch (err) {
-            res.status(500).json({ message: "error", err });
+            console.error("DAO ERROR findCreatedAfter:", err);
+            res.status(500).json({ message: "error", error: err.message });
         }
     },
 
-    // ------------------------------------------------------
-    // UNIQUE METHOD #3 (OPTIONAL) - Find actors in ascending alphabetical order
-    // ------------------------------------------------------
+    // ======================================================
+    // SORT ACTORS BY LAST NAME
+    // ======================================================
     sortByName: async (res) => {
         try {
             const sql = `
@@ -53,20 +63,10 @@ const actorDao = {
             const [rows] = await con.execute(sql);
             res.json(rows);
         } catch (err) {
-            res.status(500).json({ message: "error", err });
+            console.error("DAO ERROR sortByName:", err);
+            res.status(500).json({ message: "error", error: err.message });
         }
     }
 };
-searchByLastName: async (res, term) => {
-    try {
-        const [rows] = await con.execute(
-            "SELECT * FROM actors WHERE last_name LIKE ?",
-            [`%${term}%`]
-        );
-        res.json(rows);
-    } catch (err) {
-        res.status(500).json({ message: "error", err });
-    }
-},
 
 module.exports = actorDao;

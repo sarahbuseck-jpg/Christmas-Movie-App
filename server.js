@@ -3,10 +3,13 @@ const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 const db = require("./config/dbconfig");
-
-const app = express();
 const axios = require("axios");
 
+const app = express();
+
+// ------------------------------------------------------
+// TEST ROUTE
+// ------------------------------------------------------
 app.get("/test-api", async (req, res) => {
     try {
         const response = await axios.get("https://api.github.com");
@@ -15,9 +18,16 @@ app.get("/test-api", async (req, res) => {
         res.status(500).json({ error: "API failed", details: err });
     }
 });
-// ------------------------
-// HELMET FIX
-// ------------------------
+
+// ------------------------------------------------------
+// ACTOR API / EJS ROUTES
+// ------------------------------------------------------
+const actorsApiRoutes = require("./routes/api/actorRoutes");
+app.use("/api/actors", actorsApiRoutes);
+
+// ------------------------------------------------------
+// SECURITY
+// ------------------------------------------------------
 app.use(
     helmet({
         contentSecurityPolicy: {
@@ -36,13 +46,12 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Static files
+// ------------------------------------------------------
+// STATIC + VIEW ENGINE
+// ------------------------------------------------------
 app.use(express.static(path.join(__dirname, "public")));
-
-// View engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 
 // ------------------------------------------------------
 // HOME PAGE
@@ -51,15 +60,13 @@ app.get("/", (req, res) => {
     res.render("home", { title: "Christmas DB" });
 });
 
-
 // ------------------------------------------------------
-// ACTORS PAGE
+// ACTORS LIST PAGE (EJS)
 // ------------------------------------------------------
 app.get("/actors", async (req, res) => {
     const [actors] = await db.query("SELECT * FROM actors");
     res.render("actor/list", { title: "Actors", actors });
 });
-
 
 // ------------------------------------------------------
 // PROGRAMS PAGE
@@ -68,7 +75,6 @@ app.get("/programs", async (req, res) => {
     const [programs] = await db.query(
         "SELECT program_id, title, yr_released, poster FROM program"
     );
-
     res.render("programs/list", { title: "Programs", programs });
 });
 
@@ -80,7 +86,6 @@ app.get("/directors", async (req, res) => {
     res.render("directors/list", { title: "Directors", directors });
 });
 
-
 // ------------------------------------------------------
 // GENRES PAGE
 // ------------------------------------------------------
@@ -88,7 +93,6 @@ app.get("/genres", async (req, res) => {
     const [genres] = await db.query("SELECT * FROM genres");
     res.render("genres/list", { title: "Genres", genres });
 });
-
 
 // ------------------------------------------------------
 // STREAMINGS PAGE
@@ -98,7 +102,6 @@ app.get("/streamings", async (req, res) => {
     res.render("streamings/list", { title: "Streaming Platforms", streamings });
 });
 
-
 // ------------------------------------------------------
 // PRODUCTIONS PAGE
 // ------------------------------------------------------
@@ -107,7 +110,6 @@ app.get("/productions", async (req, res) => {
     res.render("productions/list", { title: "Productions", productions });
 });
 
-
 // ------------------------------------------------------
 // 404 PAGE
 // ------------------------------------------------------
@@ -115,9 +117,8 @@ app.use((req, res) => {
     res.status(404).render("errors/404", { title: "Not Found" });
 });
 
-
 // ------------------------------------------------------
-// START SERVER — NOTHING AFTER THIS LINE
+// START SERVER
 // ------------------------------------------------------
 app.listen(3000, () =>
     console.log("Server running at http://localhost:3000")
