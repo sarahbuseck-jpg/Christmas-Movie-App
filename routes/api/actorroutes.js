@@ -32,5 +32,11 @@ router.get("/:id", (req, res) => {
         res.json(rows[0]);
     });
 });
+// SEARCH ACTOR BY///
+app.get("/api/actors/search/:term", async (req, res) => {
+    actorDao.searchByLastName(res, req.params.term);
+});
+
+
 
 module.exports = router;

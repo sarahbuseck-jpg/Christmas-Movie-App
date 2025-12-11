@@ -5,7 +5,16 @@ const helmet = require("helmet");
 const db = require("./config/dbconfig");
 
 const app = express();
+const axios = require("axios");
 
+app.get("/test-api", async (req, res) => {
+    try {
+        const response = await axios.get("https://api.github.com");
+        res.json(response.data);
+    } catch (err) {
+        res.status(500).json({ error: "API failed", details: err });
+    }
+});
 // ------------------------
 // HELMET FIX
 // ------------------------
@@ -56,10 +65,12 @@ app.get("/actors", async (req, res) => {
 // PROGRAMS PAGE
 // ------------------------------------------------------
 app.get("/programs", async (req, res) => {
-    const [programs] = await db.query("SELECT * FROM programs");
+    const [programs] = await db.query(
+        "SELECT program_id, title, yr_released, poster FROM program"
+    );
+
     res.render("programs/list", { title: "Programs", programs });
 });
-
 
 // ------------------------------------------------------
 // DIRECTORS PAGE

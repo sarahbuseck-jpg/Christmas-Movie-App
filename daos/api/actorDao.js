@@ -1,63 +1,72 @@
-const db = require("../../config/dbconfig");
+const daoCommon = require("./daoCommon");
+const con = require("../../config/dbconfig");
 
 const actorDao = {
+    ...daoCommon,
 
     // ------------------------------------------------------
-    // GET ALL ACTORS
+    // UNIQUE METHOD #1 - Find actors by last name
     // ------------------------------------------------------
-    findAll(callback) {
-        const sql = `
-            SELECT actor_id, first_name, last_name, img_url, date_created, last_update
-            FROM actors
-            ORDER BY actor_id ASC
-        `;
-        db.query(sql, callback);
+    findByLastName: async (res, lastName) => {
+        try {
+            const sql = `
+                SELECT actor_id, first_name, last_name, img_url
+                FROM actors
+                WHERE last_name LIKE ?
+                ORDER BY last_name ASC
+            `;
+            const [rows] = await con.execute(sql, [`%${lastName}%`]);
+            res.json(rows);
+        } catch (err) {
+            res.status(500).json({ message: "error", err });
+        }
     },
 
     // ------------------------------------------------------
-    // GET ACTOR BY ID
+    // UNIQUE METHOD #2 - Find actors created after a date
     // ------------------------------------------------------
-    findById(id, callback) {
-        const sql = `
-            SELECT actor_id, first_name, last_name, img_url, date_created, last_update
-            FROM actors
-            WHERE actor_id = ?
-        `;
-        db.query(sql, [id], callback);
+    findCreatedAfter: async (res, date) => {
+        try {
+            const sql = `
+                SELECT actor_id, first_name, last_name, img_url, date_created
+                FROM actors
+                WHERE date_created > ?
+                ORDER BY date_created DESC
+            `;
+            const [rows] = await con.execute(sql, [date]);
+            res.json(rows);
+        } catch (err) {
+            res.status(500).json({ message: "error", err });
+        }
     },
 
     // ------------------------------------------------------
-    // CREATE ACTOR
+    // UNIQUE METHOD #3 (OPTIONAL) - Find actors in ascending alphabetical order
     // ------------------------------------------------------
-    create(actor, callback) {
-        const sql = `
-            INSERT INTO actors (first_name, last_name, img_url)
-            VALUES (?, ?, ?)
-        `;
-        db.query(sql, [actor.first_name, actor.last_name, actor.img_url], callback);
-    },
-
-    // ------------------------------------------------------
-    // UPDATE ACTOR
-    // ------------------------------------------------------
-    update(id, actor, callback) {
-        const sql = `
-            UPDATE actors
-            SET first_name = ?, 
-                last_name = ?, 
-                img_url = ?
-            WHERE actor_id = ?
-        `;
-        db.query(sql, [actor.first_name, actor.last_name, actor.img_url, id], callback);
-    },
-
-    // ------------------------------------------------------
-    // DELETE ACTOR
-    // ------------------------------------------------------
-    delete(id, callback) {
-        const sql = "DELETE FROM actors WHERE actor_id = ?";
-        db.query(sql, [id], callback);
+    sortByName: async (res) => {
+        try {
+            const sql = `
+                SELECT actor_id, first_name, last_name, img_url
+                FROM actors
+                ORDER BY last_name ASC
+            `;
+            const [rows] = await con.execute(sql);
+            res.json(rows);
+        } catch (err) {
+            res.status(500).json({ message: "error", err });
+        }
     }
 };
+searchByLastName: async (res, term) => {
+    try {
+        const [rows] = await con.execute(
+            "SELECT * FROM actors WHERE last_name LIKE ?",
+            [`%${term}%`]
+        );
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ message: "error", err });
+    }
+},
 
 module.exports = actorDao;

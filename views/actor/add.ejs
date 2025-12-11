@@ -1,6 +1,32 @@
 <%- include('../partials/header', { title: 'Add Actor' }) %>
 
 <div class="container mt-5" style="max-width: 600px;">
+
+    <!-- ============================
+         SEARCH ACTORS SECTION
+    ============================= -->
+    <h3 class="text-center mb-3">Search Actors</h3>
+
+    <div class="card p-3 mb-4 shadow">
+        <div class="input-group">
+            <input 
+                id="searchBox" 
+                type="text" 
+                class="form-control" 
+                placeholder="Search by last name">
+            <button id="searchBtn" class="btn btn-primary">
+                Search
+            </button>
+        </div>
+    </div>
+
+    <div id="searchResults"></div>
+
+    <hr class="my-5">
+
+    <!-- ============================
+         ADD ACTOR FORM (unchanged)
+    ============================= -->
     <h2 class="text-center mb-4">Add New Actor</h2>
 
     <form action="/actors/add" method="POST" class="p-4 shadow rounded-4 bg-light">
@@ -34,6 +60,33 @@
     <div class="text-center mt-3">
         <a href="/actors" class="btn btn-secondary">Back to Actors</a>
     </div>
+
 </div>
+
+<script>
+document.getElementById("searchBtn").addEventListener("click", async () => {
+    const term = document.getElementById("searchBox").value.trim();
+    if (!term) return;
+
+    const res = await fetch(`/api/actors/search/${term}`);
+    const data = await res.json();
+
+    const resultsDiv = document.getElementById("searchResults");
+    resultsDiv.innerHTML = "";
+
+    if (data.length === 0) {
+        resultsDiv.innerHTML = `<p class="text-center text-danger">No actors found.</p>`;
+        return;
+    }
+
+    data.forEach(actor => {
+        resultsDiv.innerHTML += `
+            <div class="card p-3 mb-2 shadow-sm">
+                <strong>${actor.first_name} ${actor.last_name}</strong>
+            </div>
+        `;
+    });
+});
+</script>
 
 <%- include('../partials/footer') %>
