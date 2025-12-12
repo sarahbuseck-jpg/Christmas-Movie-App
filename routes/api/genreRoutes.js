@@ -29,10 +29,7 @@ router.get('/:id', async (req, res) => {
   await genreDao.findById(res, req.params.id);
 });
 
-// CREATE
-router.post('/', async (req, res) => {
-  await genreDao.create(req, res);
-});
+
 
 // UPDATE
 router.put('/:id', async (req, res) => {

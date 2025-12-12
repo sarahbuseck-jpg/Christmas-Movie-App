@@ -39,13 +39,7 @@ router.get('/:id/programs', async (req, res) => {
 });
 
 // ---------------------------------------------------
-// POST /api/directors → create new director
-// ---------------------------------------------------
-router.post('/', async (req, res) => {
-  directorDao.create(req, res);
-});
 
-// ---------------------------------------------------
 // PUT /api/directors/:id → update director
 // ---------------------------------------------------
 router.put('/:id', async (req, res) => {

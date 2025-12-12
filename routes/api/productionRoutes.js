@@ -14,14 +14,6 @@ router.get('/', async (req, res) => {
 });
 
 // ------------------------------------------------------
-// POST /api/productions  (add new production)
-router.post('/', async (req, res) => {
-    try {
-        await productionDao.create(req, res);
-        res.json({ message: "Production created" });
-    } catch (err) {
-        res.status(500).json({ error: "Cannot create production" });
-    }
-});
+
 
 module.exports = router;
