@@ -40,10 +40,14 @@
 
 </div>
 
+
+<!-- ADD ACTOR SCRIPT -->
 <script>
+console.log("Add Actor page script loaded.");
+
 document.getElementById("addActorForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    
+
     const form = e.target;
     const formData = new URLSearchParams(new FormData(form));
 
@@ -58,9 +62,8 @@ document.getElementById("addActorForm").addEventListener("submit", async (e) => 
     const data = await res.json();
     const msg = document.getElementById("addMessage");
 
-    // Backend returns:  { message, id, first_name, last_name }
-    if (data.id) {
-        msg.innerHTML = `<div class="alert alert-success">Actor added!</div>`;
+    if (data.insertId) {
+        msg.innerHTML = `<div class="alert alert-success">Actor added successfully!</div>`;
         form.reset();
     } else {
         msg.innerHTML = `<div class="alert alert-danger">Error adding actor.</div>`;
@@ -68,11 +71,13 @@ document.getElementById("addActorForm").addEventListener("submit", async (e) => 
 });
 </script>
 
+
+<!-- DELETE ACTOR SCRIPT (if needed on this page) -->
 <script>
 document.addEventListener("click", async (e) => {
     if (e.target.classList.contains("delete-actor")) {
 
-        const id = e.target.getAttribute("data-id");
+        const id = e.target.dataset.id;
 
         if (!confirm("Delete this actor?")) return;
 
@@ -83,7 +88,6 @@ document.addEventListener("click", async (e) => {
         const data = await res.json();
 
         if (data.message === "deleted") {
-            // Remove card from page
             document.getElementById(`actor-${id}`).remove();
         } else {
             alert("Error deleting actor.");
@@ -93,9 +97,3 @@ document.addEventListener("click", async (e) => {
 </script>
 
 <%- include('../partials/footer') %>
-
-
-
-
-
-

@@ -8,24 +8,19 @@ const actorDao = {
     // CREATE
     // ========================
     create: async (actor) => {
-        try {
-            const [result] = await pool.query(
-                "INSERT INTO actors (first_name, last_name) VALUES (?, ?)",
-                [actor.first_name, actor.last_name]
-            );
+        const [result] = await pool.query(
+            "INSERT INTO actors (first_name, last_name) VALUES (?, ?)",
+            [actor.first_name, actor.last_name]
+        );
 
-            return { 
-                message: "Actor added successfully",
-                insertId: result.insertId
-            };
-
-        } catch (error) {
-            throw error;
-        }
+        return {
+            message: "Actor added successfully",
+            insertId: result.insertId
+        };
     },
 
     // ========================
-    // FIND ALL RAW
+    // FIND ALL RAW (for router)
     // ========================
     findAllRaw: async () => {
         const [rows] = await pool.query("SELECT * FROM actors");
@@ -33,7 +28,7 @@ const actorDao = {
     },
 
     // ========================
-    // FIND ALL (for EJS page)
+    // FIND ALL WITH CALLBACK
     // ========================
     findAll: async (callback) => {
         try {
@@ -46,7 +41,18 @@ const actorDao = {
     },
 
     // ========================
-    // FIND BY ID
+    // FIND BY ID RAW (for EJS view)
+    // ========================
+    findByIdRaw: async (id) => {
+        const [rows] = await pool.query(
+            "SELECT * FROM actors WHERE actor_id = ?",
+            [id]
+        );
+        return rows[0] || null;
+    },
+
+    // ========================
+    // FIND BY ID (JSON API)
     // ========================
     findById: async (res, id) => {
         try {

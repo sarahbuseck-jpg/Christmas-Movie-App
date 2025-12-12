@@ -30,7 +30,8 @@ app.set("views", path.join(__dirname, "views"));
 // ---------------------------------------------
 // API ROUTES  (LOAD THESE FIRST)
 // ---------------------------------------------
-app.use("/api/actors", require("./routes/api/actorroutes"));
+app.use("/api/actors", require("./routes/api/actorRoutes"));
+app.use("/actors", require("./routes/api/actorRoutes"));
 app.use("/api/productions", require("./routes/api/productionRoutes"));
 app.use("/api/streaming", require("./routes/api/streamingRoutes"));
 app.use("/api/genres", require("./routes/api/genreRoutes"));
