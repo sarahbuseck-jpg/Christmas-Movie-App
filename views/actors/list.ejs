@@ -5,26 +5,17 @@
     <!-- ACTION BUTTONS -->
     <div class="mb-4">
         <a href="/actors/add" class="btn btn-primary">Add Actor</a>
-        <a href="/actors/search" class="btn btn-secondary">Search Actor</a>
-    </div>
+        
 
     <h2 class="text-center mb-4">Actors</h2>
 
-    <!-- LIVE SEARCH BAR (optional) -->
-    <div class="mb-4">
-        <input 
-            id="actorSearch"
-            type="text"
-            class="form-control"
-            placeholder="Search actors by name..."
-        >
-    </div>
+    
 
     <!-- ACTOR LIST -->
     <div class="row g-4" id="actorResults">
 
         <% actors.forEach(a => { %>
-            <div class="col-md-3 actor-card">
+            <div class="col-md-3 actor-card" id="actor-<%= a.actor_id %>">
                 <div class="card shadow border-0 rounded-4 text-center">
 
                     <img 
@@ -34,10 +25,11 @@
                     >
 
                     <div class="card-body">
-                        <h5 class="card-title fw-bold">
-                            <%= a.first_name %> <%= a.last_name %>
-                        </h5>
-                    </div>
+    <h5 class="card-title fw-bold">
+        <%= a.first_name %> <%= a.last_name %>
+    </h5>
+
+                     
 
                 </div>
             </div>
@@ -46,36 +38,3 @@
     </div>
 
 </div>
-
-<script>
-document.getElementById("actorSearch").addEventListener("keyup", async (e) => {
-    const term = e.target.value.trim();
-    const container = document.getElementById("actorResults");
-
-    const res = await fetch(`/api/actors/search?term=${term}`);
-    const data = await res.json();
-
-    container.innerHTML = "";
-
-    data.forEach(a => {
-        container.innerHTML += `
-            <div class="col-md-3 actor-card">
-                <div class="card shadow border-0 rounded-4 text-center">
-                    <img 
-                        src="${a.img_url || '/images/default_actor.jpg'}" 
-                        class="card-img-top rounded-top-4"
-                        style="height:250px; object-fit:cover;"
-                    >
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">
-                            ${a.first_name} ${a.last_name}
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-});
-</script>
-
-<%- include('../partials/footer') %>

@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const app = express();
 
 // ---------------------------------------------
-// BASIC SECURITY
+// SECURITY
 // ---------------------------------------------
 app.use(
     helmet({
@@ -16,11 +16,10 @@ app.use(
 app.use(cors());
 
 // ---------------------------------------------
-// BODY PARSING
+// BODY PARSER
 // ---------------------------------------------
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 // ---------------------------------------------
 // STATIC + VIEWS
 // ---------------------------------------------
@@ -29,16 +28,16 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // ---------------------------------------------
-// API ROUTES
+// API ROUTES  (LOAD THESE FIRST)
 // ---------------------------------------------
-app.use("/api/actors", require("./routes/api/actorRoutes"));
+app.use("/api/actors", require("./routes/api/actorroutes"));
 app.use("/api/productions", require("./routes/api/productionRoutes"));
 app.use("/api/streaming", require("./routes/api/streamingRoutes"));
 app.use("/api/genres", require("./routes/api/genreRoutes"));
 app.use("/api/directors", require("./routes/api/directorRoutes"));
 
 // ---------------------------------------------
-// WEB ROUTES FOR ALL PAGES
+// WEB ROUTES (AFTER API ROUTES)
 // ---------------------------------------------
 app.use("/", require("./routes/router"));
 

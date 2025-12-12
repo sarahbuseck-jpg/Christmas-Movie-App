@@ -11,7 +11,12 @@ const streamingDao = {
             res.status(500).json({ error: err.message });
         }
     },
-
+findAllRaw: async () => {
+    const [rows] = await db.query(
+        "SELECT streaming_id, streaming_name FROM streamings"
+    );
+    return rows;
+},
     findById: async (res, id) => {
         try {
             const [rows] = await db.query(
