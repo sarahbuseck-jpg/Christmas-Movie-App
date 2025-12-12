@@ -20,7 +20,7 @@ const actorDao = {
     },
 
     // ========================
-    // FIND ALL RAW (for router)
+    // FIND ALL RAW
     // ========================
     findAllRaw: async () => {
         const [rows] = await pool.query("SELECT * FROM actors");
@@ -28,20 +28,7 @@ const actorDao = {
     },
 
     // ========================
-    // FIND ALL WITH CALLBACK
-    // ========================
-    findAll: async (callback) => {
-        try {
-            const [rows] = await pool.query("SELECT * FROM actors");
-            callback(rows);
-        } catch (error) {
-            console.error(error);
-            callback([]);
-        }
-    },
-
-    // ========================
-    // FIND BY ID RAW (for EJS view)
+    // FIND BY ID RAW
     // ========================
     findByIdRaw: async (id) => {
         const [rows] = await pool.query(
@@ -52,7 +39,7 @@ const actorDao = {
     },
 
     // ========================
-    // FIND BY ID (JSON API)
+    // FIND BY ID (API JSON)
     // ========================
     findById: async (res, id) => {
         try {
@@ -87,11 +74,11 @@ const actorDao = {
     // DELETE
     // ========================
     delete: async (id) => {
-        await pool.query(
+        const [result] = await pool.query(
             "DELETE FROM actors WHERE actor_id = ?",
             [id]
         );
-        return true;
+        return result.affectedRows > 0;
     }
 
 };
