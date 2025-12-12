@@ -1,8 +1,14 @@
 const con = require('../../config/dbconfig');
 const daoCommon = require('../Common/daoCommon');
-const { queryAction } = require('../../helpers/queryAction');
+
 const genreDao = {
   table: 'genre',
+
+  // Raw list for HTML views
+  findAllRaw: async () => {
+    const [rows] = await con.execute("SELECT * FROM genre");
+    return rows;
+  },
 
   // Shared CRUD
   findAll: (res) => daoCommon.findAll(res, 'genre'),
@@ -12,20 +18,20 @@ const genreDao = {
   update: (req, res) => daoCommon.update(req, res, 'genre'),
   delete: (res, id) => daoCommon.delete(res, 'genre', id),
 
-  // Unique methods
-  findByName: async (res, name) => {
+  // Unique
+  searchByName: async (req, res) => {
     try {
       const [rows] = await con.execute(
         'SELECT * FROM genre WHERE name LIKE ?',
-        [`%${name}%`]
+        [`%${req.query.name}%`]
       );
       res.json(rows);
-    } catch (error) {
-      res.status(500).json({ message: 'error', error });
+    } catch (err) {
+      res.status(500).json({ message: 'error', err });
     }
   },
 
-  countPrograms: async (res, genreId) => {
+  findProgramsByGenre: async (res, id) => {
     try {
       const [rows] = await con.execute(
         `SELECT g.name, COUNT(ptg.program_id) AS program_count
@@ -33,11 +39,11 @@ const genreDao = {
          LEFT JOIN program_to_genre ptg ON g.genre_id = ptg.genre_id
          WHERE g.genre_id = ?
          GROUP BY g.genre_id`,
-        [genreId]
+        [id]
       );
       res.json(rows);
-    } catch (error) {
-      res.status(500).json({ message: 'error', error });
+    } catch (err) {
+      res.status(500).json({ message: 'error', err });
     }
   }
 };

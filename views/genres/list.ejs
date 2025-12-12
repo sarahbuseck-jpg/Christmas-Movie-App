@@ -5,13 +5,17 @@
 <table class="table table-striped">
     <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th>Genre</th>
+        <th>Date Created</th>
+        <th>Last Updated</th>
     </tr>
 
     <% genres.forEach(g => { %>
     <tr>
-        <td><%= g.id %></td>
-        <td><%= g.name %></td>
+        <td><%= g.genre_id %></td>
+        <td><%= g.genre %></td>
+        <td><%= g.date_created %></td>
+        <td><%= g.last_update %></td>
     </tr>
     <% }) %>
 </table>

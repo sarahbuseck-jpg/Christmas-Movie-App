@@ -1,15 +1,15 @@
-<%- include('../partials/header') %>
-<%- include("../partials/navbar") %>
+<%- include('../partials/header', { title: 'Add Streaming Platform' }) %>
+
 <h2>Add Streaming Platform</h2>
 
-<form method="POST" action="/streaming">
+<form method="POST" action="/streamings/add">
 
-<div class="mb-3">
-  <label class="form-label">Platform Name</label>
-  <input class="form-control" name="name" required>
-</div>
+    <div class="mb-3">
+        <label class="form-label">Platform Name</label>
+        <input class="form-control" name="streaming_name" required>
+    </div>
 
-<button class="btn btn-success">Save</button>
+    <button class="btn btn-success">Save</button>
 
 </form>
 

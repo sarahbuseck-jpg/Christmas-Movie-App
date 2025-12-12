@@ -2,6 +2,8 @@
 
 <h2>Streaming Platforms</h2>
 
+<a href="/streamings/add" class="btn btn-primary mb-3">Add New Streaming</a>
+
 <table class="table table-striped">
     <tr>
         <th>ID</th>
@@ -15,24 +17,5 @@
     </tr>
     <% }) %>
 </table>
-<script>
-    const snowContainer = document.createElement("div");
-    document.body.appendChild(snowContainer);
 
-    function createSnowflake() {
-        const snow = document.createElement("div");
-        snow.classList.add("snowflake");
-        snow.innerHTML = "❄";
-
-        snow.style.left = Math.random() * window.innerWidth + "px";
-        snow.style.animationDuration = 4 + Math.random() * 4 + "s";
-        snow.style.fontSize = 10 + Math.random() * 20 + "px";
-
-        snowContainer.appendChild(snow);
-
-        setTimeout(() => snow.remove(), 8000);
-    }
-
-    setInterval(createSnowflake, 150);
-</script>
 <%- include('../partials/footer') %>

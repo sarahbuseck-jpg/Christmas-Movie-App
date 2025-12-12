@@ -11,28 +11,10 @@ const directorDao = {
     update: (req, res) => daoCommon.update(req, res, 'director'),
     delete: (res, id) => daoCommon.delete(res, 'director', id),
 
-    findByFirstName: async (res, firstName) => {
-        try {
-            const [rows] = await con.execute(
-                'SELECT * FROM director WHERE first_name LIKE ?',
-                [`%${firstName}%`]
-            );
-            res.json(rows);
-        } catch (error) {
-            res.status(500).json({ message: 'error', table: 'director', error });
-        }
-    },
-
-    findByLastName: async (res, lastName) => {
-        try {
-            const [rows] = await con.execute(
-                'SELECT * FROM director WHERE last_name LIKE ?',
-                [`%${lastName}%`]
-            );
-            res.json(rows);
-        } catch (error) {
-            res.status(500).json({ message: 'error', table: 'director', error });
-        }
+    // NEW: this returns the rows for your EJS page
+    findAllRaw: async () => {
+        const [rows] = await con.execute("SELECT * FROM director");
+        return rows;
     }
 };
 

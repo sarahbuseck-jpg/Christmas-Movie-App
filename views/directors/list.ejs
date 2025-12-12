@@ -13,14 +13,10 @@
 
 <% directors.forEach(d => { %>
 <tr>
-    <td><%= d.id %></td>
-    <td><%= d.name %></td>
-    <td><%= d.age %></td>
-    <td>
-        <% if (d.image) { %>
-            <img src="/images/<%= d.image %>" width="80">
-        <% } %>
-    </td>
+    <td><%= d.director_id %></td>
+    <td><%= d.director %></td>
+    <td><%= d.date_created %></td>
+    <td><%= d.last_update %></td>
 </tr>
 <% }) %>
 

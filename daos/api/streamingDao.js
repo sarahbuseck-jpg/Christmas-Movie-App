@@ -1,28 +1,66 @@
-const con = require('../../config/dbconfig');
-const daoCommon = require('../Common/daoCommon');
+const db = require("../../config/dbconfig");
 
 const streamingDao = {
-  table: 'streamings',
+    table: "streamings",
 
-  // Shared CRUD
-  findAll: (res) => daoCommon.findAll(res, streamingDao.table),
-  findById: (res, id) => daoCommon.findById(res, streamingDao.table, id),
-  sort: (res, column) => daoCommon.sort(res, streamingDao.table, column),
-  create: (req, res) => daoCommon.create(req, res, streamingDao.table),
-  update: (req, res) => daoCommon.update(req, res, streamingDao.table),
-  delete: (res, id) => daoCommon.delete(res, streamingDao.table, id),
+    findAll: async (res) => {
+        try {
+            const [rows] = await db.query("SELECT * FROM streamings");
+            res.json(rows);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
 
-  // Unique: find streaming platform by name
-  findByName: async (res, name) => {
-    try {
-      const sql = `SELECT * FROM streaming WHERE name LIKE ?`;
-      const [rows] = await con.execute(sql, [`%${name}%`]);
-      res.json(rows);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "error", err });
+    findById: async (res, id) => {
+        try {
+            const [rows] = await db.query(
+                "SELECT * FROM streamings WHERE streaming_id = ?",
+                [id]
+            );
+            res.json(rows[0] || {});
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+
+    create: async (res, data) => {
+        try {
+            const { streaming_name } = data;
+            const [result] = await db.query(
+                "INSERT INTO streamings (streaming_name) VALUES (?)",
+                [streaming_name]
+            );
+            res.json({ insertedId: result.insertId });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+
+    update: async (res, id, data) => {
+        try {
+            const { streaming_name } = data;
+            await db.query(
+                "UPDATE streamings SET streaming_name = ? WHERE streaming_id = ?",
+                [streaming_name, id]
+            );
+            res.json({ message: "Updated" });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+
+    delete: async (res, id) => {
+        try {
+            await db.query(
+                "DELETE FROM streamings WHERE streaming_id = ?",
+                [id]
+            );
+            res.json({ message: "Deleted" });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
     }
-  }
 };
 
 module.exports = streamingDao;

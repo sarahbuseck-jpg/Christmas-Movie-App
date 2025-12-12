@@ -2,35 +2,27 @@ const express = require("express");
 const router = express.Router();
 const actorDao = require("../../daos/api/actorDao");
 
-// ADD PAGE
-router.get("/add-page", (req, res) => {
-    res.render("actor/add", { title: "Add Actor" });
-});
-
-// SEARCH PAGE
-router.get("/search-page", (req, res) => {
-    res.render("actor/search", { title: "Search Actors" });
-});
-
 // ADD ACTOR
-router.post("/add", (req, res) => {
-    actorDao.create(req, res);
+router.post('/add', async (req, res) => {
+    const result = await actorDao.create(req, res);
+    res.json(result);
 });
 
-// SEARCH ACTOR
+// SEARCH ACTORS by last name (JSON)
 router.get("/search/:term", (req, res) => {
-  daoCommon.search(res, "actors", "last_name", req.params.term);
+    const term = req.params.term;
+    actorDao.searchByLastName(res, term);
 });
 
-
-// GET ALL
+// GET ALL ACTORS
 router.get("/", (req, res) => {
     actorDao.findAll(res);
 });
 
-// GET BY ID
+// GET ACTOR BY ID
 router.get("/:id", (req, res) => {
     actorDao.findById(res, req.params.id);
 });
 
 module.exports = router;
+
