@@ -3,22 +3,6 @@ const router = express.Router();
 const actorDao = require("../../daos/api/actorDao");
 
 // ===============================
-// ADD ACTOR
-// ===============================
-router.post("/", async (req, res) => {
-    try {
-        const result = await actorDao.create(req.body);
-        res.json({
-            message: "Actor added",
-            insertId: result.insertId
-        });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Error adding actor" });
-    }
-});
-
-// ===============================
 // SEARCH MUST COME BEFORE :id
 // ===============================
 router.get("/search/:term", (req, res) => {
@@ -46,22 +30,26 @@ router.delete("/:id", async (req, res) => {
 });
 
 // ===============================
-// GET ALL ACTORS
+// GET ALL ACTORS (HTML PAGE)
 // ===============================
-router.get("/", (req, res) => {
-    actorDao.findAll((actors) => {
-        res.render("actor/list", { actors });
-    });
+router.get("/", async (req, res) => {
+    const actors = await actorDao.findAllRaw();
+    res.render("actors/list", { title: "Actors", actors });
 });
+
+// ===============================
+// ADD ACTOR PAGE
+// ===============================
 router.get("/add", (req, res) => {
-    res.render("actor/add");
+    res.render("actors/add", { title: "Add Actor" });
 });
+
 // ===============================
-// GET ACTOR BY ID
+// ACTOR DETAIL PAGE
 // ===============================
 router.get("/:id", async (req, res) => {
     const actor = await actorDao.findByIdRaw(req.params.id);
-    res.render("actor/detail", { actor });
+    res.render("actors/detail", { title: "Actor Details", actor });
 });
 
 module.exports = router;

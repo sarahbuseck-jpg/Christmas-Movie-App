@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../config/dbconfig");
 
-// DAOs
 const actorDao = require("../daos/api/actorDao");
 const directorDao = require("../daos/api/directorDao");
 const genreDao = require("../daos/api/genreDao");
 const streamingDao = require("../daos/api/streamingDao");
 const productionDao = require("../daos/api/productionDao");
+const db = require("../config/dbconfig");
 
 // ---------------------------------------------
 // HOME PAGE
@@ -48,14 +47,14 @@ router.get("/genres", async (req, res) => {
     res.render("genres/list", { title: "Genres", genres });
 });
 
-// ==========================================
-// STREAMINGS PAGE (HTML VIEW)
-// ==========================================
+// ---------------------------------------------
+// STREAMINGS PAGE
+// ---------------------------------------------
 router.get("/streamings", async (req, res) => {
     const streamings = await streamingDao.findAllRaw();
-    res.render("streamings/list", { streamings });
+    res.render("streamings/list", { title: "Streamings", streamings });
 });
-    
+
 // ---------------------------------------------
 // PRODUCTIONS PAGES
 // ---------------------------------------------
