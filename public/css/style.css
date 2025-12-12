@@ -54,18 +54,19 @@ footer p {
    Snow Fix — VERY IMPORTANT
 -----------------------------*/
 
-/* Always keep content above overlays */
-body, nav, .container, main, footer {
+/* Only navbar gets elevated z-index */
+nav, .navbar {
     position: relative;
     z-index: 10;
 }
 
-/* Snow MUST stay behind everything */
+/* Snow stays behind everything */
 #snow-container,
 .snowflake {
     pointer-events: none !important;
     z-index: -1 !important;
 }
+
 
 /* Snowflake animation */
 .snowflake {
@@ -82,4 +83,8 @@ body, nav, .container, main, footer {
         transform: translateY(100vh);
         opacity: 0;
     }
+}.page-content {
+    padding-top: 80px;
+    position: relative;
+    z-index: 5;
 }

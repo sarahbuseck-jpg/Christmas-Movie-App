@@ -28,6 +28,9 @@ router.get('/actors/:id', async (req,res)=>{
     const actor = await actorDao.findByIdRaw(req.params.id);
     res.render('actor/detail', { actor });
 });
+router.get('/actor', (req, res) => {
+    res.redirect('/actors');
+});
 
 // ---------------------
 // DIRECTORS
