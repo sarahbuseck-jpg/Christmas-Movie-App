@@ -13,12 +13,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
-/* Delecte Actor*/
-.delete-actor {
-    cursor: pointer !important;
-    position: relative;
-   z-index: 50 !important;
-}
 
 
 
