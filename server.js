@@ -16,12 +16,12 @@ server.use(
 server.use(cors());
 
 // ---------------------------------------------
-// BODY PARSER
+// BODY 
 // ---------------------------------------------
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 // ---------------------------------------------
-// STATIC + VIEWS
+//  VIEWS
 // ---------------------------------------------
 server.use(express.static(path.join(__dirname, "public")));
 server.set("view engine", "ejs");
